@@ -70,6 +70,10 @@
     min-width: 400px;
     justify-content: space-between;
   }
+
+  .navBarContainer {
+    padding: 30px 30px;
+  }
 }
 
 /* Desktop View - large */

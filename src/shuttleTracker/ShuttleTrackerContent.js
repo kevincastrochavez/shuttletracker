@@ -20,7 +20,6 @@ export default function ShuttleTrackerContent() {
       <Title order={1}>Shuttle Live Tracking</Title>
       <Space h='lg' />
       <Space h='lg' />
-      <Space h='lg' />
       <>
         {locationLoading ? (
           <ShuttleTrackerSkeleton />
@@ -28,6 +27,7 @@ export default function ShuttleTrackerContent() {
           <>
             <PreferredStop />
             <MinutesAway />
+            <Space h='xl' />
             <GoogleMapComponent />
           </>
         )}

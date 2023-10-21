@@ -7,8 +7,7 @@ function MinutesAway() {
 
   return (
     <>
-      <Space h='lg' />
-      <Space h='xs' />
+      <Space h='xl' />
       <p>
         The Shuttle is {minutesAway} {minutesAway !== 1 ? 'minutes' : 'minute'}{' '}
         away from you

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.8.1",
     "@mantine/core": "^7.1.5",
     "@mantine/hooks": "^7.1.5",
     "@react-google-maps/api": "^2.19.2",

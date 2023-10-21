@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import classes from "./ShuttleTrackerFooter.module.css";
+
 function Footer() {
   const [currentYear, setCurrentYear] = useState(0);
   let navigate = useNavigate();
@@ -11,35 +13,39 @@ function Footer() {
   });
 
   return (
-    <div className="footerContainer">
-      <div className="footerContainer-title">REXBURG SHUTTLE TRACKER</div>
-      <div className="footerInfoBox">
-        <div className="footerInfoBoxSingle">
-          <div className="footerInfoBoxSingle-title">ABOUT THIS WEBSITE</div>
-          <div className="footerInfoBoxSingle-links">
-            <p className="footerInfoBoxSingle-link">
+    <div className={classes.footerContainer}>
+      <div className={classes.footerContainerTitle}>
+        REXBURG SHUTTLE TRACKER
+      </div>
+      <div className={classes.footerInfoBox}>
+        <div className={classes.footerInfoBoxSingle}>
+          <div className={classes.footerInfoBoxSingleTitle}>
+            ABOUT THIS WEBSITE
+          </div>
+          <div className={classes.footerInfoBoxSingleParagraphs}>
+            <p className={classes.footerInfoBoxSingle}>
               This website is not an official platform of Walmart or Salt Lake
               Express. We are an independent non-profit team providing
               information and services related to the Rexburg Walmart Shuttle.
             </p>
           </div>
         </div>
-        <div className="footerInfoBoxSingle">
-          <div className="footerInfoBoxSingle-title">DISCLAIMER</div>
-          <div className="footerInfoBoxSingle-links">
-            <p className="footerInfoBoxSingle-link">
+        <div className={classes.footerInfoBoxSingle}>
+          <div className={classes.footerInfoBoxSingleTitle}>DISCLAIMER</div>
+          <div className={classes.footerInfoBoxSingleParagraphs}>
+            <p className={classes.footerInfoBoxSingle}>
               Any use of the Walmart or Salt Lake Express names or trademarks on
               this website is purely for informative purposes and does not imply
               any affiliation or endorsement by these companies.
             </p>
           </div>
         </div>
-        <div className="footerInfoBoxSingle">
-          <div className="footerInfoBoxSingle-title">SECTIONS</div>
-          <div className="footerInfoBoxSingle-links">
+        <div className={classes.footerInfoBoxSingle}>
+          <div className={classes.footerInfoBoxSingleTitle}>SECTIONS</div>
+          <div className={classes.footerInfoBoxSingleLinks}>
             <Link
               to={"/"}
-              className="footerInfoBoxSingle-link"
+              className={classes.footerInfoBoxSingleLink}
               onClick={() => {
                 navigate("/");
               }}
@@ -48,7 +54,7 @@ function Footer() {
             </Link>
             <Link
               to={"/"}
-              className="footerInfoBoxSingle-link"
+              className={classes.footerInfoBoxSingleLink}
               onClick={() => {
                 navigate("/");
               }}
@@ -57,7 +63,7 @@ function Footer() {
             </Link>
             <Link
               to={"/"}
-              className="footerInfoBoxSingle-link"
+              className={classes.footerInfoBoxSingleLink}
               onClick={() => {
                 navigate("/");
               }}
@@ -66,7 +72,7 @@ function Footer() {
             </Link>
             <Link
               to={"/"}
-              className="footerInfoBoxSingle-link"
+              className={classes.footerInfoBoxSingleLink}
               onClick={() => {
                 navigate("/");
               }}
@@ -75,7 +81,7 @@ function Footer() {
             </Link>
             <Link
               to={"/"}
-              className="footerInfoBoxSingle-link"
+              className={classes.footerInfoBoxSingleLink}
               onClick={() => {
                 navigate("/");
               }}
@@ -85,9 +91,9 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="footerInfoBox">
-        <div className="footerInfoBoxSingle">
-          <div className="footerRights">
+      <div className={classes.footerInfoBox}>
+        <div className={classes.footerInfoBoxSingle}>
+          <div className={classes.footerRights}>
             ® {currentYear} BYUI HACKATHON. All Rights Reserved
           </div>
         </div>

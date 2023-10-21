@@ -1,0 +1,79 @@
+.footerContainer {
+  background: #23242b;
+  color: #fff;
+  font-family: "Roboto";
+  padding: 40px 24px 40px 24px;
+}
+
+.footerContainerTitle {
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 5px 0px 20px 0px;
+}
+
+.footerInfoBoxSingleTitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 5px 0px;
+}
+
+.footerInfoBoxSingleParagraphs p {
+  font-size: 0.8rem;
+}
+
+.footerInfoBoxSingleLinks {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerInfoBoxSingleLink {
+  font-size: 0.8rem;
+  padding: 5px 0px;
+  text-decoration: none;
+  color: white;
+}
+
+.footerInfoBoxSingleLink:hover {
+  color: #fec007;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+}
+
+.footerInfoBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerInfoBoxSingle {
+  max-width: 500px;
+  padding: 5px 0px 10px 0px;
+}
+
+.footerRights {
+  font-size: 0.7rem;
+}
+
+/* Tablet View - medium */
+@media only screen and (min-width: 720px) {
+  .footerInfoBox {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* Desktop View - large */
+@media only screen and (min-width: 900px) {
+  .footerInfoBox {
+    width: 100%;
+    max-width: 981px;
+  }
+  .footerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Bigger View - extralarge */
+@media only screen and (min-width: 1200px) {
+}

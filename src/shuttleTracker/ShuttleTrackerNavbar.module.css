@@ -2,6 +2,10 @@
   height: 62px;
 }
 
+.navBarInfoBoxSingleLinks {
+  display: none;
+}
+
 .navBarContainer {
   background: #23242b;
   color: #fff;
@@ -23,11 +27,6 @@
 
 .navBarInfoBoxSingleParagraphs p {
   font-size: 0.8rem;
-}
-
-.navBarInfoBoxSingleLinks {
-  display: flex;
-  flex-direction: column;
 }
 
 .navBarInfoBoxSingleLink {

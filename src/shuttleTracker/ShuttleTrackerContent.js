@@ -8,6 +8,7 @@ import PreferredStop from './PreferredStop';
 import GoogleMapComponent from './GoogleMapComponent';
 import ShuttleTrackerFooter from './ShuttleTrackerFooter';
 import ShuttleTrackerDriver from './ShuttleTrackerDriver';
+import ShuttleTrackerCount from './ShuttleTrackerCount';
 
 /**
  * The main Shuttle Tracker content: stops list, minutes away & map
@@ -32,6 +33,7 @@ export default function ShuttleTrackerContent() {
             <Space h='xl' />
             <GoogleMapComponent />
             <ShuttleTrackerDriver />
+            <ShuttleTrackerCount />
           </>
         )}
       </>

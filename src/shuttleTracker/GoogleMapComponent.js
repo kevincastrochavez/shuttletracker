@@ -9,7 +9,7 @@ import { Skeleton } from '@mantine/core';
 import { Box, Flex } from '@chakra-ui/react';
 
 import { useBusInfo } from './ShuttleTrackerProvider';
-import car from './car.png';
+import marker from './images/marker.png';
 
 function GoogleMapComponent() {
   const middleOfRexburgCoords = {
@@ -106,7 +106,7 @@ function GoogleMapComponent() {
             mapTypeControl: false,
           }}
         >
-          <Marker position={busLocation} icon={car} map={map} />
+          <Marker position={busLocation} icon={marker} map={map} />
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}

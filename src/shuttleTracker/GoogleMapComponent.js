@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   useJsApiLoader,
   GoogleMap,
@@ -36,70 +36,79 @@ function GoogleMapComponent() {
   const { location: preferredLocationSelected } =
     stopSelectedCoords[stopSelected];
 
-  const onLoad = React.useCallback(async function callback(map) {
-    setMap(map);
+  useEffect(() => {
+    onLoad();
+  }, [stopSelected]);
 
-    // Get directions
-    const google = window.google;
-    const directionsService = new google.maps.DirectionsService();
+  const onLoad = React.useCallback(
+    async function callback(map) {
+      setMap(map);
 
-    const completeRouteData = await directionsService.route({
-      origin: walmartCoords,
-      destination: walmartCoords,
-      waypoints: [
-        {
-          location: { lat: 43.81778, lng: -111.78084 },
-          stopover: true,
-        },
-        {
-          location: { lat: 43.814201, lng: -111.778122 },
-          stopover: true,
-        },
-        {
-          location: { lat: 43.81180247920654, lng: -111.78677373375258 },
-          stopover: true,
-        },
-        {
-          location: { lat: 43.813570621409866, lng: -111.79428811938575 },
-          stopover: true,
-        },
-        {
-          location: { lat: 43.81561946956219, lng: -111.79476980506578 },
-          stopover: false,
-        },
-        {
-          location: { lat: 43.8155133, lng: -111.7903156 },
-          stopover: true,
-        },
-        {
-          location: { lat: 43.817596, lng: -111.788459 },
-          stopover: true,
-        },
-        {
-          location: { lat: 43.8195804, lng: -111.7868141 },
-          stopover: true,
-        },
-        {
-          location: { lat: 43.8221074545991, lng: -111.78322995479034 },
-          stopover: true,
-        },
-        {
-          location: { lat: 43.8297894, lng: -111.7839334 },
-          stopover: true,
-        },
-      ],
-      travelMode: 'DRIVING',
-    });
+      // Get directions
+      const google = window.google;
+      const directionsService = new google.maps.DirectionsService();
 
-    const nearStopRoute = await directionsService.route({
-      origin: preferredLocationSelected,
-      destination: busLocation,
-      travelMode: 'DRIVING',
-    });
+      const completeRouteData = await directionsService.route({
+        origin: walmartCoords,
+        destination: walmartCoords,
+        waypoints: [
+          {
+            location: { lat: 43.81778, lng: -111.78084 },
+            stopover: true,
+          },
+          {
+            location: { lat: 43.814201, lng: -111.778122 },
+            stopover: true,
+          },
+          {
+            location: { lat: 43.81180247920654, lng: -111.78677373375258 },
+            stopover: true,
+          },
+          {
+            location: { lat: 43.813570621409866, lng: -111.79428811938575 },
+            stopover: true,
+          },
+          {
+            location: { lat: 43.81561946956219, lng: -111.79476980506578 },
+            stopover: false,
+          },
+          {
+            location: { lat: 43.8155133, lng: -111.7903156 },
+            stopover: true,
+          },
+          {
+            location: { lat: 43.817596, lng: -111.788459 },
+            stopover: true,
+          },
+          {
+            location: { lat: 43.8195804, lng: -111.7868141 },
+            stopover: true,
+          },
+          {
+            location: { lat: 43.8221074545991, lng: -111.78322995479034 },
+            stopover: true,
+          },
+          {
+            location: { lat: 43.8297894, lng: -111.7839334 },
+            stopover: true,
+          },
+        ],
+        travelMode: 'DRIVING',
+      });
 
-    setDirectionsResponse(completeRouteData);
-    setNearDirectionsResponse(nearStopRoute);
-  }, []);
+      console.log(preferredLocationSelected);
+
+      const nearStopRoute = await directionsService.route({
+        origin: preferredLocationSelected,
+        destination: busLocation,
+        travelMode: 'DRIVING',
+      });
+
+      setDirectionsResponse(completeRouteData);
+      setNearDirectionsResponse(nearStopRoute);
+    },
+    [busLocation, preferredLocationSelected, walmartCoords]
+  );
 
   if (!isLoaded) return <Skeleton height={400} radius='md' />;
 

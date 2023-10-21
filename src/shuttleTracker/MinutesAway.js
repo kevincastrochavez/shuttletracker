@@ -15,7 +15,10 @@ function MinutesAway({ nearDirectionsResponse }) {
       {nearDirectionsResponse && (
         <>
           {minutesAway ? (
-            <p>The Shuttle is {minutesAway} away from you</p>
+            <p>
+              The Shuttle is approx. <b>{minutesAway}</b> away from your
+              preferred stop
+            </p>
           ) : (
             <p>
               We are having difficulties getting how far the bus is from you

@@ -13,6 +13,7 @@ const ShuttleTrackerUpdateContext = createContext({});
  * @param {Boolean} locationLoading whether the location data is being fetched or not
  * @param {Number} minutesAway minutes away the bus is from your preferred bus stop
  * @param {Array.String} busStopsList list og bus stops
+ * @param {String} carType type of car currently driving
  * @returns {JSX.Element}
  */
 
@@ -22,6 +23,7 @@ export default function ShuttleTrackerProvider({
   locationLoading,
   minutesAway,
   busStopsList,
+  carType,
 }) {
   const [value] = useStorage('preferredBusStop', 'BYU-I Hart');
   const [stopSelected, setStopSelected] = useState(() => value);
@@ -46,6 +48,7 @@ export default function ShuttleTrackerProvider({
           busStopsList,
           stopSelected,
           busLocation,
+          carType,
         }}
       >
         {children}
@@ -61,6 +64,15 @@ export default function ShuttleTrackerProvider({
 export function useBusInfo() {
   const { busStopsList, busLocation } = useShuttleTrackerProvider('useBusInfo');
   return { busStopsList, busLocation };
+}
+
+/**
+ * Indicates which car is being driven, either the van or the bus
+ * @returns {{carType}}
+ */
+export function useCarType() {
+  const { carType } = useShuttleTrackerProvider('useCarType');
+  return { carType };
 }
 
 /**

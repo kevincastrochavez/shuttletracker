@@ -30,7 +30,6 @@ export default function ShuttleTrackerContent() {
           <>
             {/* <PreferredStop /> */}
             {/* <MinutesAway /> */}
-            <Space h='xl' />
             <GoogleMapComponent />
             <ShuttleTrackerDriver />
             <ShuttleTrackerCount />

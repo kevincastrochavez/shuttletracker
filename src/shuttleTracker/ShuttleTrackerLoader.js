@@ -24,15 +24,22 @@ export default function ShuttleTrackerLoader({ children }) {
   ];
 
   const [location, setLocation] = useState({});
+  const [carType, setCarType] = useState('');
   const [locationLoading, setLocationLoading] = useState(true);
   const [minutesAway, setMinutesAway] = useState(0);
 
   const locationsRef = ref(db, 'locations/');
+  const carTypeRef = ref(db, 'busType/');
   useEffect(() => {
     onValue(locationsRef, (snapshot) => {
       const data = snapshot.val();
       setLocation(data);
       setLocationLoading(false);
+    });
+
+    onValue(carTypeRef, (snapshot) => {
+      const data = snapshot.val();
+      setCarType(data);
     });
   }, [setLocation]);
 
@@ -42,6 +49,7 @@ export default function ShuttleTrackerLoader({ children }) {
       locationLoading={locationLoading}
       minutesAway={minutesAway}
       busStopsList={busStopsList}
+      carType={carType}
     >
       {children}
     </ShuttleTrackerProvider>

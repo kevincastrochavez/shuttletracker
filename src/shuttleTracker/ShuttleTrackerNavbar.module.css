@@ -1,0 +1,94 @@
+.navBarLogo {
+  height: 62px;
+}
+
+.navBarInfoBoxSingleLinks {
+  display: none;
+}
+
+.navBarContainer {
+  background: #23242b;
+  color: #fff;
+  font-family: "Roboto";
+  padding: 30px 0px 30px 0px;
+}
+
+.navBarContainerTitle {
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 5px 0px 20px 0px;
+}
+
+.navBarInfoBoxSingleTitle {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 5px 0px;
+}
+
+.navBarInfoBoxSingleParagraphs p {
+  font-size: 0.8rem;
+}
+
+.navBarInfoBoxSingleLink {
+  font-size: 0.8rem;
+  padding: 5px 0px;
+  text-decoration: none;
+  color: white;
+}
+
+.navBarInfoBoxSingleLink:hover {
+  color: #fec007;
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
+}
+
+.navBarInfoBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.navBarInfoBoxSingle {
+  max-width: 500px;
+  padding: 5px 0px 10px 0px;
+}
+
+.navBarRights {
+  font-size: 0.7rem;
+}
+
+/* Tablet View - medium */
+@media only screen and (min-width: 720px) {
+  .navBarInfoBox {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .navBarInfoBoxSingleLinks {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 400px;
+    justify-content: space-between;
+  }
+
+  .navBarContainer {
+    padding: 30px 30px;
+  }
+}
+
+/* Desktop View - large */
+@media only screen and (min-width: 900px) {
+  .navBarInfoBox {
+    width: 100%;
+    max-width: 1010px;
+  }
+  .navBarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Bigger View - extralarge */
+@media only screen and (min-width: 1200px) {
+}

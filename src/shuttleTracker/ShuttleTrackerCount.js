@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import classes from './ShuttleTrackerCount.module.css';
 import bus from './images/bus.svg';
@@ -26,7 +26,7 @@ function ShuttleTrackerCount() {
       <h2>{busType === 'bus' ? 'BUS' : 'VAN'}</h2>
       <img src={bus} alt='' />
       <p>
-        There are currently <b>{seatsAvailable}</b> out of <b>{totalSeats}</b>{' '}
+        There are currently <b>{seatsAvailable}</b> out of <b>{totalSeats}</b>{" "}
         seats available.
       </p>
       <div></div>

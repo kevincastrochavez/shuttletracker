@@ -14,6 +14,7 @@ const ShuttleTrackerUpdateContext = createContext({});
  * @param {Number} minutesAway minutes away the bus is from your preferred bus stop
  * @param {Array.String} busStopsList list og bus stops
  * @param {String} carType type of car currently driving
+ * @param {Array} passengerCount list of dates that contain the passengers who got on and off
  * @returns {JSX.Element}
  */
 
@@ -24,9 +25,40 @@ export default function ShuttleTrackerProvider({
   minutesAway,
   busStopsList,
   carType,
+  passengerCount,
 }) {
   const [value] = useStorage('preferredBusStop', 'BYU-I Hart');
   const [stopSelected, setStopSelected] = useState(() => value);
+  const { busType } = carType;
+  const dayDate = new Date().getDate();
+  const monthDate = new Date().getMonth() + 1;
+  const yearDate = new Date().getFullYear();
+  const todaysDate = `${monthDate}-${dayDate}-${yearDate}`;
+
+  const isBus = busType === 'bus';
+  const busSeats = 42;
+  const vanSeats = 15;
+  const totalSeats = isBus ? busSeats : vanSeats;
+  let seatsAvailable;
+
+  const stopsCountObjPerDay = passengerCount?.[todaysDate];
+  stopsCountObjPerDay !== undefined &&
+    Object.values(stopsCountObjPerDay)
+      .map((stopObj) => {
+        return {
+          passengersOff: stopObj.passengerOff,
+          passengersOn: stopObj.passengerOn,
+        };
+      })
+      .forEach((stop) => {
+        if (Number(stop?.passengersOff) > 0) {
+          seatsAvailable = totalSeats + Number(stop.passengersOff);
+        }
+
+        if (Number(stop?.passengersOn) > 0) {
+          seatsAvailable = totalSeats - Number(stop.passengersOn);
+        }
+      });
 
   const busLocation = useMemo(() => {
     const latitude = location?.location?.latitude;
@@ -49,6 +81,8 @@ export default function ShuttleTrackerProvider({
           stopSelected,
           busLocation,
           carType,
+          seatsAvailable,
+          totalSeats,
         }}
       >
         {children}
@@ -58,12 +92,13 @@ export default function ShuttleTrackerProvider({
 }
 
 /**
- * Provides a list of bus stops, bus location
- * @returns {{busStopsList, busLocation}}
+ * Provides a list of bus stops, bus location, available seats and total seats
+ * @returns {{busStopsList, busLocation, seatsAvailable, }}
  */
 export function useBusInfo() {
-  const { busStopsList, busLocation } = useShuttleTrackerProvider('useBusInfo');
-  return { busStopsList, busLocation };
+  const { busStopsList, busLocation, seatsAvailable, totalSeats } =
+    useShuttleTrackerProvider('useBusInfo');
+  return { busStopsList, busLocation, seatsAvailable, totalSeats };
 }
 
 /**

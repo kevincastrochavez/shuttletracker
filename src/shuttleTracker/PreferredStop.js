@@ -1,5 +1,6 @@
 import React from 'react';
 import { Select } from '@mantine/core';
+import { useViewportSize } from '@mantine/hooks';
 
 import {
   useBusInfo,
@@ -17,10 +18,21 @@ function PreferredStop() {
   const { setStopSelected } = useSetPreferredStop();
   const { stopSelected } = usePreferredStop();
   const [value, setValue] = useStorage('preferredBusStop', 'BYU-I Hart');
+  const { width } = useViewportSize();
+  let inputSize;
+  if (width <= 750) {
+    inputSize = '100%';
+  }
+  if (width > 750 && width <= 990) {
+    inputSize = '60%';
+  }
+  if (width > 990) {
+    inputSize = '40%';
+  }
 
   return (
     <Select
-      style={{ width: '100%' }}
+      style={{ width: inputSize }}
       size='md'
       label='Select your Preferred Stop'
       description='Shuttle might be closer than you think'

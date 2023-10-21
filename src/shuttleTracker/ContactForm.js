@@ -1,9 +1,14 @@
 import React from 'react';
-import { Space, Textarea, TextInput } from '@mantine/core';
+import { Button, Space, Textarea, TextInput } from '@mantine/core';
+import { useViewportSize } from '@mantine/hooks';
+
+import classes from './ContactForm.module.css';
 
 function ContactForm() {
+  const { width } = useViewportSize();
+
   return (
-    <>
+    <div className={width > 990 && classes.contactForm}>
       <Space h='lg' />
       <h2>Contact Us</h2>
       <Space h='xs' />
@@ -15,7 +20,10 @@ function ContactForm() {
         label="What's the issue?"
         placeholder='Something is not working...'
       />
-    </>
+      <Button variant='filled' mt={20} w={200}>
+        Submit Message
+      </Button>
+    </div>
   );
 }
 

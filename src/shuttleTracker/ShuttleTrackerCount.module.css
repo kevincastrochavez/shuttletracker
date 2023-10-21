@@ -5,16 +5,29 @@
   margin-bottom: 90px;
 }
 
-.countContainer img {
+.countContainerLarge {
+  display: grid;
+  justify-items: center;
+  margin-top: 90px;
+  margin-bottom: 90px;
+  width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.countContainer img,
+.countContainerLarge img {
   margin-top: 20px;
 }
 
-.countContainer p {
+.countContainer p,
+.countContainerLarge p {
   margin-top: 30px;
 }
 
-.countContainer > div {
-  margin-top: 20px;
+.countContainer > div,
+.countContainerLarge > div {
+  margin-top: 30px;
   width: 100%;
   height: 8px;
   background-color: #fec007;

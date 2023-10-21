@@ -34,7 +34,7 @@ function GoogleMapComponent() {
     const google = window.google;
     const directionsService = new google.maps.DirectionsService();
 
-    const results = await directionsService.route({
+    const completeRouteData = await directionsService.route({
       origin: walmartCoords,
       destination: walmartCoords,
       waypoints: [
@@ -82,7 +82,7 @@ function GoogleMapComponent() {
       travelMode: 'DRIVING',
     });
 
-    setDirectionsResponse(results);
+    setDirectionsResponse(completeRouteData);
   }, []);
 
   if (!isLoaded) return <Skeleton height={400} radius='md' />;

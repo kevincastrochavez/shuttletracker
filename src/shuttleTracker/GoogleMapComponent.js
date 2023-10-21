@@ -11,8 +11,10 @@ import { useViewportSize } from '@mantine/hooks';
 
 import { useBusInfo, usePreferredStop } from './ShuttleTrackerProvider';
 import marker from './images/marker.png';
+import front from './images/front.png';
 import busStopsObj from './busStopsList';
 import MinutesAway from './MinutesAway';
+import usePrevious, { useGetHeading } from './utils';
 
 function GoogleMapComponent() {
   const middleOfRexburgCoords = {
@@ -44,13 +46,19 @@ function GoogleMapComponent() {
   )[0];
   const { location: preferredLocationSelected } =
     stopSelectedCoords[stopSelected];
+  const previousLocation = usePrevious(busLocation);
 
-  useEffect(() => {
-    updateMap();
-  }, [stopSelected]);
+  // Get car heading direction and apply styles accordingly
+  const value = useGetHeading(
+    [previousLocation?.lat, previousLocation?.lng],
+    [busLocation?.lat, busLocation?.lng]
+  );
+
+  // useEffect(() => {
+  //   updateMap();
+  // }, [stopSelected]);
 
   const updateMap = async () => {
-    console.log('Updating');
     // Get directions
     const google = window.google;
     const directionsService = new google.maps.DirectionsService();

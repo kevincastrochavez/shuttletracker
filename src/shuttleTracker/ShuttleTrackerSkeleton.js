@@ -3,6 +3,10 @@ import { Skeleton } from '@mantine/core';
 
 import classes from './ShuttleTrackerSkeleton.module.css';
 
+/**
+ * Skeleton structure
+ * @returns {JSX.Element}
+ */
 function ShuttleTrackerSkeleton() {
   return (
     <>

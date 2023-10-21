@@ -8,6 +8,10 @@ import {
 } from './ShuttleTrackerProvider';
 import { useStorage } from './utils';
 
+/**
+ * Component to select preferred bus stop you will be waiting at
+ * @returns {JSX.Element}
+ */
 function PreferredStop() {
   const { busStopsList } = useBusInfo();
   const { setStopSelected } = useSetPreferredStop();

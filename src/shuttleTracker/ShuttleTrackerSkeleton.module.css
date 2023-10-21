@@ -1,0 +1,7 @@
+.avatarContainer {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 30px;
+  margin-top: 60px;
+  align-items: center;
+}

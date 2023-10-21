@@ -1,9 +1,5 @@
-import React, { useEffect } from 'react';
-import { onValue, ref } from 'firebase/database';
-import { Select } from '@mantine/core';
-
-import { useLocation, useSetLocation } from './ShuttleTrackerProvider';
-import { db } from '../firebase';
+import React from 'react';
+import { Container, Select, Space, Title } from '@mantine/core';
 
 /**
  * The main Shuttle Tracker content: stops list, minutes away & map
@@ -11,27 +7,20 @@ import { db } from '../firebase';
  */
 
 export default function ShuttleTrackerContent() {
-  const { location } = useLocation();
-  const { setLocation } = useSetLocation();
-
-  console.log(location);
-
-  const locationsRef = ref(db, 'locations/');
-  useEffect(() => {
-    onValue(locationsRef, (snapshot) => {
-      const data = snapshot.val();
-      setLocation(data);
-    });
-  }, [setLocation]);
-
   return (
-    <div>
-      {' '}
+    <Container fluid px={24} py={24}>
+      <Title order={1}>Shuttle Live Tracking</Title>
+      <Space h='lg' />
+      <Space h='lg' />
+      <Space h='lg' />
       <Select
-        label='Your favorite library'
+        style={{ width: '100%' }}
+        size='md'
+        label='Select your Preferred Stop'
+        description='Shuttle might be closer than you think'
+        data={['React', 'Angular', 'Vue']}
         placeholder='Pick value'
-        data={['React', 'Angular', 'Vue', 'Svelte']}
       />
-    </div>
+    </Container>
   );
 }

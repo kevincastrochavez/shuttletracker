@@ -1,19 +1,20 @@
-
-import React from "react";
-import { Container, Space, Title } from "@mantine/core";
-
-import { useLocation } from "./ShuttleTrackerProvider";
-import ShuttleTrackerSkeleton from "./ShuttleTrackerSkeleton";
-import MinutesAway from "./MinutesAway";
-import PreferredStop from "./PreferredStop";
-import GoogleMapComponent from "./GoogleMapComponent";
-import ShuttleTrackerNavBar from "./ShuttleTrackerNavbar";
-import ShuttleTrackerFooter from "./ShuttleTrackerFooter";
-import ShuttleTrackerDriver from "./ShuttleTrackerDriver";
-import ShuttleTrackerCount from "./ShuttleTrackerCount";
-import ContactForm from "./ContactForm";
+import React from 'react';
+import { Alert, Container, Space, Title } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 
+import { useLocation, useNotifications } from './ShuttleTrackerProvider';
+import ShuttleTrackerSkeleton from './ShuttleTrackerSkeleton';
+import MinutesAway from './MinutesAway';
+import PreferredStop from './PreferredStop';
+import GoogleMapComponent from './GoogleMapComponent';
+import ShuttleTrackerNavBar from './ShuttleTrackerNavbar';
+import ShuttleTrackerFooter from './ShuttleTrackerFooter';
+import ShuttleTrackerDriver from './ShuttleTrackerDriver';
+import ShuttleTrackerCount from './ShuttleTrackerCount';
+import ContactForm from './ContactForm';
+import logo from './images/logo.png';
+
+import classes from './ShuttleTrackerContent.module.css';
 
 /**
  * The main Shuttle Tracker content: stops list, minutes away & map
@@ -30,10 +31,12 @@ export default function ShuttleTrackerContent() {
   return (
     <>
       <Container fluid px={24} py={24} maw={1200}>
-        <ShuttleTrackerNavBar />
-        <Title order={1}>Shuttle Live Tracking</Title>
-        <Space h="lg" />
-        <Space h="lg" />
+        <div className={classes.titleContainer}>
+          <img src={logo} />
+          <Title order={1}>Shuttle Live Tracking</Title>
+        </div>
+        <Space h='lg' />
+        <Space h='lg' />
         <>
           {brokenDown ? (
             <Alert variant='filled' color='red' title='Alert title'>

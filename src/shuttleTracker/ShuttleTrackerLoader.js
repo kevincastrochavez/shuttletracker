@@ -10,6 +10,19 @@ import { db } from '../firebase';
  */
 
 export default function ShuttleTrackerLoader({ children }) {
+  const busStopsList = [
+    'Walmart',
+    'East MC Circle',
+    'Aspen Village',
+    'Center Square',
+    'The Gates',
+    'Camden Apartments',
+    'Colonial House',
+    'BYU-I Hart',
+    'BYU-I Parking Lot',
+    'Rexburg Floral',
+  ];
+
   const [location, setLocation] = useState({});
   const [locationLoading, setLocationLoading] = useState(true);
   const [minutesAway, setMinutesAway] = useState(0);
@@ -28,6 +41,7 @@ export default function ShuttleTrackerLoader({ children }) {
       location={location}
       locationLoading={locationLoading}
       minutesAway={minutesAway}
+      busStopsList={busStopsList}
     >
       {children}
     </ShuttleTrackerProvider>

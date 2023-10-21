@@ -19,24 +19,26 @@ export default function ShuttleTrackerContent() {
   const { locationLoading } = useLocation();
 
   return (
-    <Container fluid px={24} py={24}>
-      <Title order={1}>Shuttle Live Tracking</Title>
-      <Space h='lg' />
-      <Space h='lg' />
-      <>
-        {locationLoading ? (
-          <ShuttleTrackerSkeleton />
-        ) : (
-          <>
-            {/* <PreferredStop /> */}
-            {/* <MinutesAway /> */}
-            <GoogleMapComponent />
-            <ShuttleTrackerDriver />
-            <ShuttleTrackerCount />
-          </>
-        )}
-      </>
+    <>
+      <Container fluid px={24} py={24}>
+        <Title order={1}>Shuttle Live Tracking</Title>
+        <Space h='lg' />
+        <Space h='lg' />
+        <>
+          {locationLoading ? (
+            <ShuttleTrackerSkeleton />
+          ) : (
+            <>
+              <PreferredStop />
+              <MinutesAway />
+              <GoogleMapComponent />
+              <ShuttleTrackerDriver />
+              <ShuttleTrackerCount />
+            </>
+          )}
+        </>
+      </Container>
       <ShuttleTrackerFooter />
-    </Container>
+    </>
   );
 }

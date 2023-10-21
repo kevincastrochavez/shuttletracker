@@ -24,6 +24,7 @@ function MinutesAway() {
         The Shuttle is {minutesAway} {minutesAway !== 1 ? 'minutes' : 'minute'}{' '}
         away from you
       </p>
+      <Space h='lg' />
     </>
   );
 }

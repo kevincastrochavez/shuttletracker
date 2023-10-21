@@ -10,8 +10,6 @@ import { useBusInfo, useCarType } from './ShuttleTrackerProvider';
  */
 function ShuttleTrackerCount() {
   const { totalSeats, seatsAvailable } = useBusInfo();
-  console.log(totalSeats);
-  console.log(seatsAvailable);
 
   const {
     carType: { busType },

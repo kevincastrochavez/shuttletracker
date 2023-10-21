@@ -8,8 +8,10 @@ import {
 import { Skeleton } from '@mantine/core';
 import { Box, Flex } from '@chakra-ui/react';
 
-import { useBusInfo } from './ShuttleTrackerProvider';
+import { useBusInfo, usePreferredStop } from './ShuttleTrackerProvider';
 import marker from './images/marker.png';
+import busStopsObj from './busStopsList';
+import MinutesAway from './MinutesAway';
 
 function GoogleMapComponent() {
   const middleOfRexburgCoords = {
@@ -23,9 +25,16 @@ function GoogleMapComponent() {
   });
 
   const [map, setMap] = useState(null);
+  const [nearDirectionsResponse, setNearDirectionsResponse] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const center = middleOfRexburgCoords;
   const { busLocation } = useBusInfo();
+  const { stopSelected } = usePreferredStop();
+  const stopSelectedCoords = busStopsObj.filter(
+    (stop) => Object.keys(stop)[0] === stopSelected
+  )[0];
+  const { location: preferredLocationSelected } =
+    stopSelectedCoords[stopSelected];
 
   const onLoad = React.useCallback(async function callback(map) {
     setMap(map);
@@ -82,7 +91,14 @@ function GoogleMapComponent() {
       travelMode: 'DRIVING',
     });
 
+    const nearStopRoute = await directionsService.route({
+      origin: preferredLocationSelected,
+      destination: busLocation,
+      travelMode: 'DRIVING',
+    });
+
     setDirectionsResponse(completeRouteData);
+    setNearDirectionsResponse(nearStopRoute);
   }, []);
 
   if (!isLoaded) return <Skeleton height={400} radius='md' />;
@@ -95,6 +111,7 @@ function GoogleMapComponent() {
       h='40vh'
     >
       <Box position='absolute' left={0} top={0} h='40vh' w='100%'>
+        <MinutesAway nearDirectionsResponse={nearDirectionsResponse} />
         <GoogleMap
           center={center}
           zoom={13}

@@ -8,6 +8,7 @@ const ShuttleTrackerContext = createContext({});
  * @param {Any} children components passed
  * @param {Object} location location object including the coordinates
  * @param {Boolean} locationLoading whether the location data is being fetched or not
+ * @param {Number} minutesAway minutes away the bus is from your preferred bus stop
  * @returns {JSX.Element}
  */
 
@@ -15,9 +16,12 @@ export default function ShuttleTrackerProvider({
   children,
   location,
   locationLoading,
+  minutesAway,
 }) {
   return (
-    <ShuttleTrackerContext.Provider value={{ location, locationLoading }}>
+    <ShuttleTrackerContext.Provider
+      value={{ location, locationLoading, minutesAway }}
+    >
       {children}
     </ShuttleTrackerContext.Provider>
   );
@@ -31,6 +35,15 @@ export function useLocation() {
   const { location, locationLoading } =
     useShuttleTrackerProvider('useLocation');
   return { location, locationLoading };
+}
+
+/**
+ * Get the location object, loading status`
+ * @returns {{location, locationLoading}}
+ */
+export function useMinutesAway() {
+  const { minutesAway } = useShuttleTrackerProvider('useMinutesAway');
+  return { minutesAway };
 }
 
 /**

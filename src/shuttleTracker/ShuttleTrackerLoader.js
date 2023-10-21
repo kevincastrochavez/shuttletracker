@@ -12,6 +12,7 @@ import { db } from '../firebase';
 export default function ShuttleTrackerLoader({ children }) {
   const [location, setLocation] = useState({});
   const [locationLoading, setLocationLoading] = useState(true);
+  const [minutesAway, setMinutesAway] = useState(0);
 
   const locationsRef = ref(db, 'locations/');
   useEffect(() => {
@@ -26,6 +27,7 @@ export default function ShuttleTrackerLoader({ children }) {
     <ShuttleTrackerProvider
       location={location}
       locationLoading={locationLoading}
+      minutesAway={minutesAway}
     >
       {children}
     </ShuttleTrackerProvider>

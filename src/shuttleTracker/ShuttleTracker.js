@@ -1,10 +1,17 @@
 import React from 'react';
 
+import ShuttleTrackerLoader from './ShuttleTrackerLoader';
+import ShuttleTrackerContent from './ShuttleTrackerContent';
+
 /**
  * Main Shuttle Tracker rendering component
  * @returns {JSX.Element}
  */
 
 export default function ShuttleTracker() {
-  return <div>Shuttle Tracker</div>;
+  return (
+    <ShuttleTrackerLoader>
+      <ShuttleTrackerContent></ShuttleTrackerContent>
+    </ShuttleTrackerLoader>
+  );
 }

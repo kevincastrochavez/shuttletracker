@@ -36,9 +36,9 @@ function GoogleMapComponent() {
   const { location: preferredLocationSelected } =
     stopSelectedCoords[stopSelected];
 
-  useEffect(() => {
-    onLoad();
-  }, [stopSelected]);
+  // useEffect(() => {
+  //   onLoad();
+  // }, [stopSelected]);
 
   const onLoad = React.useCallback(
     async function callback(map) {

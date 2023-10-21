@@ -1,5 +1,5 @@
 import React from 'react';
-import { Space, Textarea, TextInput } from '@mantine/core';
+import { Button, Space, Textarea, TextInput } from '@mantine/core';
 
 function ContactForm() {
   return (
@@ -15,6 +15,9 @@ function ContactForm() {
         label="What's the issue?"
         placeholder='Something is not working...'
       />
+      <Button variant='filled' mt={20} w={200}>
+        Submit Message
+      </Button>
     </>
   );
 }

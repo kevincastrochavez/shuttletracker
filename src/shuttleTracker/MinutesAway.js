@@ -4,7 +4,6 @@ import { useMinutesAway } from './ShuttleTrackerProvider';
 
 function MinutesAway() {
   const { minutesAway } = useMinutesAway();
-  console.log(minutesAway);
 
   return (
     <>

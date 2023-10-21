@@ -1,9 +1,15 @@
 import React from 'react';
 import { Select } from '@mantine/core';
-import { useBusInfo } from './ShuttleTrackerProvider';
+import {
+  useBusInfo,
+  usePreferredStop,
+  useSetPreferredStop,
+} from './ShuttleTrackerProvider';
 
 function PreferredStop() {
   const { busStopsList } = useBusInfo();
+  const { setStopSelected } = useSetPreferredStop();
+  const { stopSelected } = usePreferredStop();
 
   return (
     <Select
@@ -13,6 +19,8 @@ function PreferredStop() {
       description='Shuttle might be closer than you think'
       data={busStopsList}
       placeholder='Pick value'
+      onChange={setStopSelected}
+      value={stopSelected}
     />
   );
 }

@@ -1,7 +1,8 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import { useContext } from 'react';
 
 const ShuttleTrackerContext = createContext({});
+const ShuttleTrackerUpdateContext = createContext({});
 
 /**
  * Providers for the Shuttle Map components
@@ -20,17 +21,38 @@ export default function ShuttleTrackerProvider({
   minutesAway,
   busStopsList,
 }) {
+  const [stopSelected, setStopSelected] = useState('');
+
+  console.log(stopSelected);
+
   return (
-    <ShuttleTrackerContext.Provider
-      value={{ location, locationLoading, minutesAway, busStopsList }}
-    >
-      {children}
-    </ShuttleTrackerContext.Provider>
+    <ShuttleTrackerUpdateContext.Provider value={{ setStopSelected }}>
+      <ShuttleTrackerContext.Provider
+        value={{
+          location,
+          locationLoading,
+          minutesAway,
+          busStopsList,
+          stopSelected,
+        }}
+      >
+        {children}
+      </ShuttleTrackerContext.Provider>
+    </ShuttleTrackerUpdateContext.Provider>
   );
 }
 
 /**
- * Get the location object, loading status`
+ * Provides a list of bus stops, your preferred bus stop
+ * @returns {{busStopsList}}
+ */
+export function useBusInfo() {
+  const { busStopsList } = useShuttleTrackerProvider('useBusInfo');
+  return { busStopsList };
+}
+
+/**
+ * Gets the location object, loading status`
  * @returns {{location, locationLoading}}
  */
 export function useLocation() {
@@ -40,7 +62,7 @@ export function useLocation() {
 }
 
 /**
- * Provide the minutes away the bus is from your preferred stop
+ * Provides the minutes away the bus is from your preferred stop
  * @returns {{location, locationLoading}}
  */
 export function useMinutesAway() {
@@ -49,12 +71,23 @@ export function useMinutesAway() {
 }
 
 /**
- * Provide a list of bus stops
- * @returns {{busStopsList}}
+ * Provides your preferred bus stop
+ * @returns {{stopSelected}}
  */
-export function useBusInfo() {
-  const { busStopsList } = useShuttleTrackerProvider('useBusInfo');
-  return { busStopsList };
+export function usePreferredStop() {
+  const { stopSelected } = useShuttleTrackerProvider('usePreferredStop');
+  return { stopSelected };
+}
+
+/**
+ * Sets your preferred bus stop
+ * @returns {{setStopSelected}}
+ */
+export function useSetPreferredStop() {
+  const { setStopSelected } = useSetShuttleTrackerProvider(
+    'useSetPreferredStop'
+  );
+  return { setStopSelected };
 }
 
 /**
@@ -64,6 +97,20 @@ export function useBusInfo() {
  */
 function useShuttleTrackerProvider(functionName) {
   const data = useContext(ShuttleTrackerContext);
+  if (!data)
+    throw new Error(
+      `${functionName} must be used within a component wrapped by ShuttleTrackerProvider`
+    );
+  return data;
+}
+
+/**
+ * Enables making changes to the ShuttleMapContext (using the ShuttleMapUpdateContext)
+ * @param {string} functionName - just for using in error reporting
+ * @returns {{}}
+ */
+function useSetShuttleTrackerProvider(functionName) {
+  const data = useContext(ShuttleTrackerUpdateContext);
   if (!data)
     throw new Error(
       `${functionName} must be used within a component wrapped by ShuttleTrackerProvider`

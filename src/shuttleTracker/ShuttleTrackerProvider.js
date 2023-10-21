@@ -1,6 +1,8 @@
 import React, { createContext, useState } from 'react';
 import { useContext } from 'react';
 
+import { useStorage } from './utils';
+
 const ShuttleTrackerContext = createContext({});
 const ShuttleTrackerUpdateContext = createContext({});
 
@@ -21,9 +23,8 @@ export default function ShuttleTrackerProvider({
   minutesAway,
   busStopsList,
 }) {
-  const [stopSelected, setStopSelected] = useState('');
-
-  console.log(stopSelected);
+  const [value] = useStorage('preferredBusStop', 'BYU-I Hart');
+  const [stopSelected, setStopSelected] = useState(() => value);
 
   return (
     <ShuttleTrackerUpdateContext.Provider value={{ setStopSelected }}>

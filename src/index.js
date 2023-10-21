@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-const ShuttleTracker = lazy(() => import('./ShuttleTracker/ShuttleTracker'));
+const ShuttleTracker = lazy(() => import('./shuttleTracker/ShuttleTracker'));
 
 const router = createBrowserRouter([
   {

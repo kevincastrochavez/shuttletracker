@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useMemo, useState } from 'react';
 import { useContext } from 'react';
 
 import { useStorage } from './utils';
@@ -26,6 +26,16 @@ export default function ShuttleTrackerProvider({
   const [value] = useStorage('preferredBusStop', 'BYU-I Hart');
   const [stopSelected, setStopSelected] = useState(() => value);
 
+  const busLocation = useMemo(() => {
+    const latitude = location?.location?.latitude;
+    const longitude = location?.location?.longitude;
+
+    return {
+      lat: latitude,
+      lng: longitude,
+    };
+  }, [location?.location?.latitude, location?.location?.longitude]);
+
   return (
     <ShuttleTrackerUpdateContext.Provider value={{ setStopSelected }}>
       <ShuttleTrackerContext.Provider
@@ -35,6 +45,7 @@ export default function ShuttleTrackerProvider({
           minutesAway,
           busStopsList,
           stopSelected,
+          busLocation,
         }}
       >
         {children}
@@ -44,12 +55,12 @@ export default function ShuttleTrackerProvider({
 }
 
 /**
- * Provides a list of bus stops, your preferred bus stop
- * @returns {{busStopsList}}
+ * Provides a list of bus stops, bus location
+ * @returns {{busStopsList, busLocation}}
  */
 export function useBusInfo() {
-  const { busStopsList } = useShuttleTrackerProvider('useBusInfo');
-  return { busStopsList };
+  const { busStopsList, busLocation } = useShuttleTrackerProvider('useBusInfo');
+  return { busStopsList, busLocation };
 }
 
 /**

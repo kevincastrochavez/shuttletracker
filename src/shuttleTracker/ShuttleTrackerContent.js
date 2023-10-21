@@ -5,6 +5,7 @@ import { useLocation } from './ShuttleTrackerProvider';
 import ShuttleTrackerSkeleton from './ShuttleTrackerSkeleton';
 import MinutesAway from './MinutesAway';
 import PreferredStop from './PreferredStop';
+import GoogleMapComponent from './GoogleMapComponent';
 
 /**
  * The main Shuttle Tracker content: stops list, minutes away & map
@@ -27,6 +28,7 @@ export default function ShuttleTrackerContent() {
           <>
             <PreferredStop />
             <MinutesAway />
+            <GoogleMapComponent />
           </>
         )}
       </>

@@ -1,19 +1,18 @@
 .footerContainer {
   background: #23242b;
   color: #fff;
-  font-family: 'Roboto';
-  padding: 40px 24px 40px 24px;
-  margin-top: 40px;
+  font-family: "Roboto";
+  padding: 28px 24px 40px 24px;
 }
 
 .footerContainerTitle {
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.95rem;
   padding: 5px 0px 20px 0px;
 }
 
 .footerInfoBoxSingleTitle {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 500;
   padding: 5px 0px;
 }
@@ -28,10 +27,11 @@
 }
 
 .footerInfoBoxSingleLink {
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   padding: 5px 0px;
+  font-weight: lighter;
   text-decoration: none;
-  color: white;
+  color: #ffffff;
 }
 
 .footerInfoBoxSingleLink:hover {
@@ -45,13 +45,38 @@
   flex-direction: column;
 }
 
+.footerInfoBox:nth-child(3) {
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid white;
+  align-items: center;
+  opacity: 75%;
+}
+
 .footerInfoBoxSingle {
-  max-width: 500px;
+  max-width: 264px;
+  width: 100%;
   padding: 5px 0px 10px 0px;
+  font-size: 0.65rem;
+  font-weight: lighter;
+}
+
+.footerInfoBoxSingle:nth-child(1) {
+  order: 2;
+}
+
+.footerInfoBoxSingle:nth-child(2) {
+  order: 3;
+  padding-bottom: 25px;
+}
+
+.footerInfoBoxSingle:nth-child(3) {
+  order: 1;
 }
 
 .footerRights {
   font-size: 0.7rem;
+  padding: 40px 0px 0px 0px;
 }
 
 /* Tablet View - medium */

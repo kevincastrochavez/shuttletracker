@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { onValue, ref } from 'firebase/database';
+import { Select } from '@mantine/core';
 
 import { useLocation, useSetLocation } from './ShuttleTrackerProvider';
 import { db } from '../firebase';
@@ -23,5 +24,14 @@ export default function ShuttleTrackerContent() {
     });
   }, [setLocation]);
 
-  return <div>ShuttleTrackerContent</div>;
+  return (
+    <div>
+      {' '}
+      <Select
+        label='Your favorite library'
+        placeholder='Pick value'
+        data={['React', 'Angular', 'Vue', 'Svelte']}
+      />
+    </div>
+  );
 }

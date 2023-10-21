@@ -7,6 +7,7 @@ import {
 } from '@react-google-maps/api';
 import { Skeleton } from '@mantine/core';
 import { Box, Flex } from '@chakra-ui/react';
+import { useViewportSize } from '@mantine/hooks';
 
 import { useBusInfo, usePreferredStop } from './ShuttleTrackerProvider';
 import marker from './images/marker.png';
@@ -18,6 +19,15 @@ function GoogleMapComponent() {
     lat: 43.82402030515836,
     lng: -111.78097057734374,
   };
+  const { width } = useViewportSize();
+  let mapSize;
+
+  if (width <= 750) {
+    mapSize = '40vh';
+  }
+  if (width > 750) {
+    mapSize = '60vh';
+  }
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -34,8 +44,6 @@ function GoogleMapComponent() {
   )[0];
   const { location: preferredLocationSelected } =
     stopSelectedCoords[stopSelected];
-
-  console.log(busLocation);
 
   useEffect(() => {
     updateMap();
@@ -132,12 +140,12 @@ function GoogleMapComponent() {
       position='relative'
       flexDirection='column'
       alignItems='center'
-      h='40vh'
+      h={mapSize}
     >
-      <Box position='absolute' left={0} top={0} h='40vh' w='100%'>
+      <Box position='absolute' left={0} top={0} h={mapSize} w='100%'>
         <MinutesAway nearDirectionsResponse={nearDirectionsResponse} />
         <GoogleMap
-          defaultZoom={13}
+          defaultZoom={14}
           onLoad={(map) => {
             onLoad(map);
           }}

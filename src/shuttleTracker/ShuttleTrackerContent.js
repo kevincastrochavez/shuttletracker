@@ -10,6 +10,7 @@ import ShuttleTrackerFooter from './ShuttleTrackerFooter';
 import ShuttleTrackerDriver from './ShuttleTrackerDriver';
 import ShuttleTrackerCount from './ShuttleTrackerCount';
 import ContactForm from './ContactForm';
+import { useViewportSize } from '@mantine/hooks';
 
 /**
  * The main Shuttle Tracker content: stops list, minutes away & map
@@ -17,12 +18,15 @@ import ContactForm from './ContactForm';
  */
 
 export default function ShuttleTrackerContent() {
+  const { width } = useViewportSize();
   const { locationLoading } = useLocation();
 
   return (
     <>
-      <Container fluid px={24} py={24}>
-        <Title order={1}>Shuttle Live Tracking</Title>
+      <Container fluid px={24} py={24} maw={1200}>
+        <Title order={1} align={width > 1200 && 'center'}>
+          Shuttle Live Tracking
+        </Title>
         <Space h='lg' />
         <Space h='lg' />
         <>

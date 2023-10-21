@@ -24,7 +24,7 @@ function MinutesAway({ nearDirectionsResponse }) {
               We are having difficulties getting how far the bus is from you
             </p>
           )}
-          <Space h='lg' />
+          <Space h='xl' />
         </>
       )}
     </>

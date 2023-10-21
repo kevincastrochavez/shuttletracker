@@ -1,9 +1,10 @@
 import React from 'react';
-import { Container, Select, Space, Title } from '@mantine/core';
+import { Container, Space, Title } from '@mantine/core';
 
-import { useBusInfo, useLocation } from './ShuttleTrackerProvider';
+import { useLocation } from './ShuttleTrackerProvider';
 import ShuttleTrackerSkeleton from './ShuttleTrackerSkeleton';
 import MinutesAway from './MinutesAway';
+import PreferredStop from './PreferredStop';
 
 /**
  * The main Shuttle Tracker content: stops list, minutes away & map
@@ -12,7 +13,6 @@ import MinutesAway from './MinutesAway';
 
 export default function ShuttleTrackerContent() {
   const { locationLoading } = useLocation();
-  const { busStopsList } = useBusInfo();
 
   return (
     <Container fluid px={24} py={24}>
@@ -25,14 +25,7 @@ export default function ShuttleTrackerContent() {
           <ShuttleTrackerSkeleton />
         ) : (
           <>
-            <Select
-              style={{ width: '100%' }}
-              size='md'
-              label='Select your Preferred Stop'
-              description='Shuttle might be closer than you think'
-              data={busStopsList}
-              placeholder='Pick value'
-            />
+            <PreferredStop />
             <MinutesAway />
           </>
         )}

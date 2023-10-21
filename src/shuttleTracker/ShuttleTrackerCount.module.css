@@ -1,8 +1,8 @@
 .countContainer {
   display: grid;
   justify-items: center;
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin-top: 90px;
+  margin-bottom: 90px;
 }
 
 .countContainer img {

@@ -1,8 +1,9 @@
 .footerContainer {
   background: #23242b;
   color: #fff;
-  font-family: "Roboto";
+  font-family: 'Roboto';
   padding: 40px 24px 40px 24px;
+  margin-top: 40px;
 }
 
 .footerContainerTitle {

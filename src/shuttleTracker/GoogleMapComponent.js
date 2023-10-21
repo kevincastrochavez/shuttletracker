@@ -37,9 +37,24 @@ function GoogleMapComponent() {
 
   console.log(busLocation);
 
-  // useEffect(() => {
-  //   onLoad();
-  // }, [stopSelected]);
+  useEffect(() => {
+    updateMap();
+  }, [stopSelected]);
+
+  const updateMap = async () => {
+    console.log('Updating');
+    // Get directions
+    const google = window.google;
+    const directionsService = new google.maps.DirectionsService();
+
+    const nearStopRoute = await directionsService.route({
+      origin: preferredLocationSelected,
+      destination: busLocation,
+      travelMode: 'DRIVING',
+    });
+
+    setNearDirectionsResponse(nearStopRoute);
+  };
 
   const onLoad = React.useCallback(
     async function callback(map) {
@@ -98,8 +113,6 @@ function GoogleMapComponent() {
         travelMode: 'DRIVING',
       });
 
-      console.log(preferredLocationSelected);
-
       const nearStopRoute = await directionsService.route({
         origin: preferredLocationSelected,
         destination: busLocation,
@@ -125,7 +138,9 @@ function GoogleMapComponent() {
         <MinutesAway nearDirectionsResponse={nearDirectionsResponse} />
         <GoogleMap
           defaultZoom={13}
-          onLoad={onLoad}
+          onLoad={(map) => {
+            onLoad(map);
+          }}
           onZoomChanged={(map) => map}
           onDrag={(map) => map}
           mapContainerStyle={{ width: '100%', height: '100%' }}

@@ -18,7 +18,6 @@ function GoogleMapComponent() {
     lat: 43.82402030515836,
     lng: -111.78097057734374,
   };
-  const walmartCoords = { lat: 43.854752, lng: -111.777962 };
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -36,6 +35,8 @@ function GoogleMapComponent() {
   const { location: preferredLocationSelected } =
     stopSelectedCoords[stopSelected];
 
+  console.log(busLocation);
+
   // useEffect(() => {
   //   onLoad();
   // }, [stopSelected]);
@@ -43,6 +44,7 @@ function GoogleMapComponent() {
   const onLoad = React.useCallback(
     async function callback(map) {
       setMap(map);
+      const walmartCoords = { lat: 43.854752, lng: -111.777962 };
 
       // Get directions
       const google = window.google;
@@ -107,7 +109,7 @@ function GoogleMapComponent() {
       setDirectionsResponse(completeRouteData);
       setNearDirectionsResponse(nearStopRoute);
     },
-    [busLocation, preferredLocationSelected, walmartCoords]
+    [busLocation, preferredLocationSelected]
   );
 
   if (!isLoaded) return <Skeleton height={400} radius='md' />;
@@ -122,9 +124,10 @@ function GoogleMapComponent() {
       <Box position='absolute' left={0} top={0} h='40vh' w='100%'>
         <MinutesAway nearDirectionsResponse={nearDirectionsResponse} />
         <GoogleMap
-          center={center}
-          zoom={13}
+          defaultZoom={13}
           onLoad={onLoad}
+          onZoomChanged={(map) => map}
+          onDrag={(map) => map}
           mapContainerStyle={{ width: '100%', height: '100%' }}
           options={{
             zoomControl: false,
@@ -132,7 +135,12 @@ function GoogleMapComponent() {
             mapTypeControl: false,
           }}
         >
-          <Marker position={busLocation} icon={marker} map={map} />
+          <Marker
+            position={busLocation}
+            icon={marker}
+            map={map}
+            center={center}
+          />
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}

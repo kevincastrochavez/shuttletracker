@@ -1,0 +1,15 @@
+.driverContainer {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 30px;
+
+  background-color: white;
+  padding: 20px;
+  margin-top: 60px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 8px;
+}
+
+.driverInfo {
+  display: grid;
+}

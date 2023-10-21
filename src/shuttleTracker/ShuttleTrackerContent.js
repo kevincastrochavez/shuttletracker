@@ -21,15 +21,8 @@ export default function ShuttleTrackerContent() {
   const { width } = useViewportSize();
   const { locationLoading } = useLocation();
   const {
-    notifications: { deviation, reduce, traffic },
+    notifications: { brokenDown, deviation, reduce, traffic },
   } = useNotifications();
-
-  // console.log(brokenDown);
-  // console.log(deviation);
-  // console.log(reduce);
-  // console.log(traffic);
-
-  const brokenDown = true;
 
   return (
     <>
@@ -41,7 +34,7 @@ export default function ShuttleTrackerContent() {
         <Space h='lg' />
         <>
           {brokenDown ? (
-            <Alert variant='light' color='red' title='Alert title'>
+            <Alert variant='filled' color='red' title='Alert title'>
               The Shuttle Tracker is currently down. Please try again later
             </Alert>
           ) : (
@@ -50,8 +43,37 @@ export default function ShuttleTrackerContent() {
                 <ShuttleTrackerSkeleton />
               ) : (
                 <>
+                  {traffic && (
+                    <Alert
+                      variant='outline'
+                      color='yellow'
+                      title='Alert title'
+                      mb={20}
+                    >
+                      Heavy traffic. Times may be slower
+                    </Alert>
+                  )}
+                  {reduce && (
+                    <Alert
+                      variant='outline'
+                      color='blue'
+                      title='Alert title'
+                      mb={20}
+                    >
+                      Reduced Hours - Call for more information
+                    </Alert>
+                  )}
+                  {deviation && (
+                    <Alert
+                      variant='outline'
+                      color='orange'
+                      title='Alert title'
+                      mb={20}
+                    >
+                      Bus might need to take a detour
+                    </Alert>
+                  )}
                   <PreferredStop />
-                  {/* <MinutesAway /> */}
                   <GoogleMapComponent />
                   <ShuttleTrackerDriver />
                   <ShuttleTrackerCount />

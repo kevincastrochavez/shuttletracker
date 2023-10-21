@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-  useJsApiLoader,
-  GoogleMap,
-  Marker,
-  DirectionsRenderer,
-} from '@react-google-maps/api';
+import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
 import { Skeleton } from '@mantine/core';
 import { Box, Flex } from '@chakra-ui/react';
 
@@ -26,14 +21,12 @@ function GoogleMapComponent() {
 
   if (!isLoaded) return <Skeleton height={400} radius='md' />;
 
-  console.log(busLocation);
-
   return (
     <Flex
       position='relative'
       flexDirection='column'
       alignItems='center'
-      h='100vh'
+      h='40vh'
     >
       <Box position='absolute' left={0} top={0} h='40vh' w='100%'>
         <GoogleMap
@@ -45,10 +38,9 @@ function GoogleMapComponent() {
             zoomControl: false,
             streetViewControl: false,
             mapTypeControl: false,
-            fullscreenControl: false,
           }}
         >
-          <Marker position={busLocation} icon={car} />
+          <Marker position={busLocation} icon={car} map={map} />
         </GoogleMap>
       </Box>
     </Flex>

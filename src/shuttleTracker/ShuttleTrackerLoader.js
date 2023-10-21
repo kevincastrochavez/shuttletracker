@@ -28,10 +28,12 @@ export default function ShuttleTrackerLoader({ children }) {
   const [passengerCount, setPassengerCount] = useState(true);
   const [locationLoading, setLocationLoading] = useState(true);
   const [minutesAway, setMinutesAway] = useState(0);
+  const [notifications, setNotifications] = useState({});
 
   const locationsRef = ref(db, 'locations/');
   const carTypeRef = ref(db, 'busType/');
   const passengerCountRef = ref(db, 'passengerCount/');
+  const notificationsRef = ref(db, 'notifications/');
 
   useEffect(() => {
     onValue(locationsRef, (snapshot) => {
@@ -49,6 +51,16 @@ export default function ShuttleTrackerLoader({ children }) {
       const data = snapshot.val();
       setPassengerCount(data);
     });
+
+    onValue(notificationsRef, (snapshot) => {
+      const data = snapshot.val();
+      setNotifications(data);
+    });
+
+    onValue(passengerCountRef, (snapshot) => {
+      const data = snapshot.val();
+      setPassengerCount(data);
+    });
   }, [setLocation]);
 
   return (
@@ -59,6 +71,7 @@ export default function ShuttleTrackerLoader({ children }) {
       busStopsList={busStopsList}
       carType={carType}
       passengerCount={passengerCount}
+      notifications={notifications}
     >
       {children}
     </ShuttleTrackerProvider>

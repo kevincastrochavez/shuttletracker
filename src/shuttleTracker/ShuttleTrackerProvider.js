@@ -15,6 +15,7 @@ const ShuttleTrackerUpdateContext = createContext({});
  * @param {Array.String} busStopsList list og bus stops
  * @param {String} carType type of car currently driving
  * @param {Array} passengerCount list of dates that contain the passengers who got on and off
+ * @param {Object} notifications list of notifications for alerts
  * @returns {JSX.Element}
  */
 
@@ -26,6 +27,7 @@ export default function ShuttleTrackerProvider({
   busStopsList,
   carType,
   passengerCount,
+  notifications,
 }) {
   const [value] = useStorage('preferredBusStop', 'BYU-I Hart');
   const [stopSelected, setStopSelected] = useState(() => value);
@@ -83,6 +85,7 @@ export default function ShuttleTrackerProvider({
           carType,
           seatsAvailable,
           totalSeats,
+          notifications,
         }}
       >
         {children}
@@ -127,6 +130,15 @@ export function useLocation() {
 export function useMinutesAway() {
   const { minutesAway } = useShuttleTrackerProvider('useMinutesAway');
   return { minutesAway };
+}
+
+/**
+ * Returns the notifications object
+ * @returns {{notifications}}
+ */
+export function useNotifications() {
+  const { notifications } = useShuttleTrackerProvider('useNotifications');
+  return { notifications };
 }
 
 /**

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Container, Space, Title } from '@mantine/core';
+import { Container, Space, Title, Alert } from '@mantine/core';
 
-import { useLocation } from './ShuttleTrackerProvider';
+import { useLocation, useNotifications } from './ShuttleTrackerProvider';
 import ShuttleTrackerSkeleton from './ShuttleTrackerSkeleton';
 import MinutesAway from './MinutesAway';
 import PreferredStop from './PreferredStop';
@@ -20,6 +20,16 @@ import { useViewportSize } from '@mantine/hooks';
 export default function ShuttleTrackerContent() {
   const { width } = useViewportSize();
   const { locationLoading } = useLocation();
+  const {
+    notifications: { deviation, reduce, traffic },
+  } = useNotifications();
+
+  // console.log(brokenDown);
+  // console.log(deviation);
+  // console.log(reduce);
+  // console.log(traffic);
+
+  const brokenDown = true;
 
   return (
     <>
@@ -30,16 +40,24 @@ export default function ShuttleTrackerContent() {
         <Space h='lg' />
         <Space h='lg' />
         <>
-          {locationLoading ? (
-            <ShuttleTrackerSkeleton />
+          {brokenDown ? (
+            <Alert variant='light' color='red' title='Alert title'>
+              The Shuttle Tracker is currently down. Please try again later
+            </Alert>
           ) : (
             <>
-              <PreferredStop />
-              {/* <MinutesAway /> */}
-              <GoogleMapComponent />
-              <ShuttleTrackerDriver />
-              <ShuttleTrackerCount />
-              <ContactForm />
+              {locationLoading && !brokenDown ? (
+                <ShuttleTrackerSkeleton />
+              ) : (
+                <>
+                  <PreferredStop />
+                  {/* <MinutesAway /> */}
+                  <GoogleMapComponent />
+                  <ShuttleTrackerDriver />
+                  <ShuttleTrackerCount />
+                  <ContactForm />
+                </>
+              )}
             </>
           )}
         </>

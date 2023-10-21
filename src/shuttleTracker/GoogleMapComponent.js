@@ -17,10 +17,16 @@ function GoogleMapComponent() {
   });
 
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
-  const center = { lat: 43.82402030515836, lng: -111.78097057734374 };
+  const middleOfRexburgCoords = {
+    lat: 43.82402030515836,
+    lng: -111.78097057734374,
+  };
+  const center = middleOfRexburgCoords;
   const { busLocation } = useBusInfo();
 
   if (!isLoaded) return <Skeleton height={400} radius='md' />;
+
+  console.log(busLocation);
 
   return (
     <Flex
@@ -32,7 +38,7 @@ function GoogleMapComponent() {
       <Box position='absolute' left={0} top={0} h='40vh' w='100%'>
         <GoogleMap
           center={center}
-          zoom={15}
+          zoom={13}
           onLoad={(map) => setMap(map)}
           mapContainerStyle={{ width: '100%', height: '100%' }}
           options={{

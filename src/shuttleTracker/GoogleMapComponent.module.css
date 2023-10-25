@@ -1,20 +1,16 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.googleMapComponentMap {
+  height: 420px;
 }
 
 /* Tablet View - medium */
 @media only screen and (min-width: 720px) {
+  .googleMapComponentMap {
+    margin: 10px 30px !important;
+  }
 }
 
 /* Desktop View - large */
 @media only screen and (min-width: 900px) {
-  /* * {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  } */
 }
 
 /* Bigger View - extralarge */

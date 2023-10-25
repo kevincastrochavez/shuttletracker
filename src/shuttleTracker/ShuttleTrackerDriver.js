@@ -1,9 +1,9 @@
-import React from 'react';
-import { Avatar } from '@mantine/core';
+import React from "react";
+import { Avatar } from "@mantine/core";
 
-import { useLocation } from './ShuttleTrackerProvider';
-import classes from './ShuttleTrackerDriver.module.css';
-import { useViewportSize } from '@mantine/hooks';
+import { useLocation } from "./ShuttleTrackerProvider";
+import classes from "./ShuttleTrackerDriver.module.css";
+import { useViewportSize } from "@mantine/hooks";
 
 function ShuttleTrackerDriver() {
   const { width } = useViewportSize();
@@ -14,11 +14,7 @@ function ShuttleTrackerDriver() {
   } = useLocation();
 
   return (
-    <div
-      className={
-        width < 990 ? classes.driverContainer : classes.driverContainerLarge
-      }
-    >
+    <div className={classes.driverContainer}>
       <Avatar src={driverPicture} w={80} h={80} />
       <div className={classes.driverInfo}>
         <h2>{driverName}</h2>

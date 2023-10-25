@@ -1,6 +1,72 @@
 .contactForm {
-  width: 50%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 30px;
+  font-family: "Roboto";
+  height: 550px;
+  margin: 85px 24px;
+}
+
+.contactForm p {
+  margin: 15px 0px;
+}
+
+.contactForm h2 {
+  font-size: 1.5rem;
+}
+
+.contactFormEmail {
+  margin: 20px 0px;
+}
+
+.contactFormEmail input {
+  height: 55px;
+}
+
+.contactFormEmail label {
+  margin: 10px 0px;
+}
+
+.contactFormMessage {
+  margin: 25px 0px;
+}
+
+.contactFormMessage label {
+  margin: 10px 0px;
+}
+
+.contactFormMessage textarea {
+  height: 180px;
+}
+
+.contactFormButton {
+  background-color: #23242b;
+  height: 50px;
+  font-family: "Roboto";
+  font-weight: 100;
+  width: 166px;
+}
+
+/* Tablet View - medium */
+@media only screen and (min-width: 720px) {
+  .contactForm {
+    margin: 85px 30px;
+  }
+}
+
+/* Desktop View - large */
+@media only screen and (min-width: 900px) {
+  .contactForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1010px;
+    width: 100%;
+    margin: 85px 0px !important;
+  }
+
+  .contactFormEmail input {
+    width: 430px;
+  }
+
+  .contactFormMessage textarea {
+    width: 430px;
+  }
 }

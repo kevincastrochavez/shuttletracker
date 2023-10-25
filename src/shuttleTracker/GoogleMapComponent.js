@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   useJsApiLoader,
   GoogleMap,
   Marker,
   DirectionsRenderer,
-} from '@react-google-maps/api';
-import { Skeleton } from '@mantine/core';
-import { Box, Flex } from '@chakra-ui/react';
-import { useViewportSize } from '@mantine/hooks';
+} from "@react-google-maps/api";
+import { Skeleton } from "@mantine/core";
+import { Box, Flex } from "@chakra-ui/react";
+import { useViewportSize } from "@mantine/hooks";
+import classes from "./GoogleMapComponent.module.css";
 
-import { useBusInfo, usePreferredStop } from './ShuttleTrackerProvider';
-import marker from './images/marker.png';
-import front from './images/front.png';
-import busStopsObj from './busStopsList';
-import MinutesAway from './MinutesAway';
-import usePrevious, { useGetHeading } from './utils';
+import { useBusInfo, usePreferredStop } from "./ShuttleTrackerProvider";
+import marker from "./images/marker.png";
+import front from "./images/front.png";
+import busStopsObj from "./busStopsList";
+import MinutesAway from "./MinutesAway";
+import usePrevious, { useGetHeading } from "./utils";
 
 function GoogleMapComponent() {
   const middleOfRexburgCoords = {
@@ -23,12 +24,15 @@ function GoogleMapComponent() {
   };
   const { width } = useViewportSize();
   let mapSize;
+  let marginRules;
 
-  if (width <= 750) {
-    mapSize = '40vh';
+  if (width <= 720) {
+    mapSize = "450px";
+    marginRules = "10px 24px";
   }
-  if (width > 750) {
-    mapSize = '60vh';
+  if (width > 720) {
+    mapSize = "450px";
+    marginRules = "10px 30px";
   }
 
   const { isLoaded } = useJsApiLoader({
@@ -66,7 +70,7 @@ function GoogleMapComponent() {
     const nearStopRoute = await directionsService.route({
       origin: preferredLocationSelected,
       destination: busLocation,
-      travelMode: 'DRIVING',
+      travelMode: "DRIVING",
     });
 
     setNearDirectionsResponse(nearStopRoute);
@@ -126,13 +130,13 @@ function GoogleMapComponent() {
             stopover: true,
           },
         ],
-        travelMode: 'DRIVING',
+        travelMode: "DRIVING",
       });
 
       const nearStopRoute = await directionsService.route({
         origin: preferredLocationSelected,
         destination: busLocation,
-        travelMode: 'DRIVING',
+        travelMode: "DRIVING",
       });
 
       setDirectionsResponse(completeRouteData);
@@ -141,25 +145,28 @@ function GoogleMapComponent() {
     [busLocation, preferredLocationSelected]
   );
 
-  if (!isLoaded) return <Skeleton height={400} radius='md' />;
+  if (!isLoaded) return <Skeleton height={400} radius="md" />;
 
   return (
     <Flex
-      position='relative'
-      flexDirection='column'
-      alignItems='center'
+      position="relative"
+      flexDirection="column"
+      alignItems="center"
       h={mapSize}
+      m={marginRules}
     >
-      <Box position='absolute' left={0} top={0} h={mapSize} w='100%'>
+      <Box position="absolute" left={0} top={0} h={mapSize} w="100%">
         <MinutesAway nearDirectionsResponse={nearDirectionsResponse} />
         <GoogleMap
+          m={marginRules}
+          className={classes.googleMapComponentMap}
           defaultZoom={14}
           onLoad={(map) => {
             onLoad(map);
           }}
           onZoomChanged={(map) => map}
           onDrag={(map) => map}
-          mapContainerStyle={{ width: '100%', height: '100%' }}
+          mapContainerStyle={{ height: "450px" }}
           options={{
             zoomControl: false,
             streetViewControl: false,

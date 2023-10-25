@@ -1,7 +1,12 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.minutesAwayP {
+  height: 40px;
+  font-size: 0.94rem;
+  font-family: "Roboto";
+  margin: 35px 0px 15px 0px;
+}
+
+.minutesAwayB {
+  color: #fec007;
 }
 
 /* Tablet View - medium */
@@ -10,11 +15,10 @@
 
 /* Desktop View - large */
 @media only screen and (min-width: 900px) {
-  /* * {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  } */
+  .navBarInfoBox {
+    width: 100%;
+    max-width: 1010px;
+  }
 }
 
 /* Bigger View - extralarge */

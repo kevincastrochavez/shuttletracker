@@ -1,5 +1,6 @@
-import React from 'react';
-import { Space } from '@mantine/core';
+import React from "react";
+import { Space } from "@mantine/core";
+import classes from "./MinutesAway.module.css";
 
 /**
  * Small component to let you know how far the bus is from you in minutes
@@ -11,20 +12,19 @@ function MinutesAway({ nearDirectionsResponse }) {
 
   return (
     <>
-      <Space h='xl' />
       {nearDirectionsResponse && (
         <>
           {minutesAway ? (
-            <p>
-              The Shuttle is approx. <b>{minutesAway}</b> away from your
-              preferred stop
+            <p className={classes.minutesAwayP}>
+              The shuttle is approx.{" "}
+              <b className={classes.minutesAwayB}>{minutesAway}</b> away from
+              you
             </p>
           ) : (
             <p>
               We are having difficulties getting how far the bus is from you
             </p>
           )}
-          <Space h='xl' />
         </>
       )}
     </>

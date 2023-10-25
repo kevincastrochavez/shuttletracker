@@ -1,27 +1,54 @@
 .driverContainer {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 30px;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   background-color: white;
   padding: 20px;
-  margin-top: 180px;
+  margin: 165px 24px 24px 24px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 8px;
+  height: 168px;
+  outline: 1px solid #fec007;
 }
 
 .driverContainerLarge {
   display: grid;
   grid-template-columns: 80px 1fr;
-  gap: 30px;
+  gap: 18px;
   width: fit-content;
   margin: 0 auto;
 
   padding: 20px;
   margin-top: 180px;
   border-radius: 8px;
+  outline: 1px solid #fec007;
 }
 
 .driverInfo {
-  display: grid;
+  font-family: "Roboto";
+}
+
+.driverInfo h2 {
+  font-size: 20px;
+}
+
+.driverInfo p {
+  font-size: 15px;
+}
+
+/* Tablet View - medium */
+@media only screen and (min-width: 720px) {
+  .driverContainer {
+    gap: 18px;
+    margin: 165px 30px 24px 30px;
+  }
+}
+
+/* Desktop View - large */
+@media only screen and (min-width: 900px) {
+}
+
+/* Bigger View - extralarge */
+@media only screen and (min-width: 1200px) {
 }

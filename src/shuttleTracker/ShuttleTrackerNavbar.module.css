@@ -1,8 +1,17 @@
-.navBarLogo {
+.navBarContainer {
+  background-color: #23242b;
   height: 62px;
-  width: 62px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.navBarLogo {
   display: flex;
   justify-content: center;
+}
+
+.navBarLogo img {
+  height: 46px;
 }
 
 .navBarInfoBoxSingleLinks {
@@ -45,7 +54,6 @@
 
 .navBarInfoBoxSingle {
   max-width: 500px;
-  padding: 5px 0px 10px 0px;
 }
 
 .navBarRights {
@@ -82,6 +90,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100% !important;
   }
 }
 

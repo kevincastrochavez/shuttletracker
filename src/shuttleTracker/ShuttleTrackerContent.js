@@ -1,20 +1,20 @@
-import React from 'react';
-import { Alert, Container, Space, Title } from '@mantine/core';
-import { useViewportSize } from '@mantine/hooks';
+import React from "react";
+import { Alert, Container, Space, Title } from "@mantine/core";
+import { useViewportSize } from "@mantine/hooks";
 
-import { useLocation, useNotifications } from './ShuttleTrackerProvider';
-import ShuttleTrackerSkeleton from './ShuttleTrackerSkeleton';
-import MinutesAway from './MinutesAway';
-import PreferredStop from './PreferredStop';
-import GoogleMapComponent from './GoogleMapComponent';
-import ShuttleTrackerNavBar from './ShuttleTrackerNavbar';
-import ShuttleTrackerFooter from './ShuttleTrackerFooter';
-import ShuttleTrackerDriver from './ShuttleTrackerDriver';
-import ShuttleTrackerCount from './ShuttleTrackerCount';
-import ContactForm from './ContactForm';
-import logo from './images/logo.png';
+import { useLocation, useNotifications } from "./ShuttleTrackerProvider";
+import ShuttleTrackerSkeleton from "./ShuttleTrackerSkeleton";
+import MinutesAway from "./MinutesAway";
+import PreferredStop from "./PreferredStop";
+import GoogleMapComponent from "./GoogleMapComponent";
+import ShuttleTrackerNavBar from "./ShuttleTrackerNavbar";
+import ShuttleTrackerFooter from "./ShuttleTrackerFooter";
+import ShuttleTrackerDriver from "./ShuttleTrackerDriver";
+import ShuttleTrackerCount from "./ShuttleTrackerCount";
+import ContactForm from "./ContactForm";
+// import logo from "./images/logo.png";
 
-import classes from './ShuttleTrackerContent.module.css';
+import classes from "./ShuttleTrackerContent.module.css";
 
 /**
  * The main Shuttle Tracker content: stops list, minutes away & map
@@ -29,17 +29,14 @@ export default function ShuttleTrackerContent() {
   } = useNotifications();
 
   return (
-    <>
-      <Container fluid px={24} py={24} maw={1200}>
-        <div className={classes.titleContainer}>
-          <img src={logo} />
-          <Title order={1}>Shuttle Live Tracking</Title>
-        </div>
-        <Space h='lg' />
-        <Space h='lg' />
+    <div className={classes.NavBarPageWraperFooter}>
+      <ShuttleTrackerNavBar />
+      <div className={classes.contentPageWrapper}>
+        <div className={classes.titleContainer}>SHUTTLE LIVE TRACKING</div>
+
         <>
           {brokenDown ? (
-            <Alert variant='filled' color='red' title='Alert title'>
+            <Alert variant="filled" color="red" title="Alert title">
               The Shuttle Tracker is currently down. Please try again later
             </Alert>
           ) : (
@@ -50,9 +47,9 @@ export default function ShuttleTrackerContent() {
                 <>
                   {traffic && (
                     <Alert
-                      variant='outline'
-                      color='yellow'
-                      title='Alert title'
+                      variant="outline"
+                      color="yellow"
+                      title="Alert title"
                       mb={20}
                     >
                       Heavy traffic. Times may be slower
@@ -60,9 +57,9 @@ export default function ShuttleTrackerContent() {
                   )}
                   {reduce && (
                     <Alert
-                      variant='outline'
-                      color='blue'
-                      title='Alert title'
+                      variant="outline"
+                      color="blue"
+                      title="Alert title"
                       mb={20}
                     >
                       Reduced Hours - Call for more information
@@ -70,16 +67,19 @@ export default function ShuttleTrackerContent() {
                   )}
                   {deviation && (
                     <Alert
-                      variant='outline'
-                      color='orange'
-                      title='Alert title'
+                      variant="outline"
+                      color="orange"
+                      title="Alert title"
                       mb={20}
                     >
                       Bus might need to take a detour
                     </Alert>
                   )}
-                  <PreferredStop />
-                  <GoogleMapComponent />
+                  <PreferredStop
+                    className={classes.contentPreferredStop}
+                    id="yourStop"
+                  />
+                  <GoogleMapComponent className={classes.contentMap} />
                   <ShuttleTrackerDriver />
                   <ShuttleTrackerCount />
                   <ContactForm />
@@ -88,8 +88,8 @@ export default function ShuttleTrackerContent() {
             </>
           )}
         </>
-      </Container>
+      </div>
       <ShuttleTrackerFooter />
-    </>
+    </div>
   );
 }

@@ -94,7 +94,7 @@ function Footer() {
       <div className={classes.footerInfoBox}>
         <div className={classes.footerInfoBoxSingle}>
           <div className={classes.footerRights}>
-            ® {currentYear} BYUI HACKATHON. All Rights Reserved
+            ® {currentYear} Castro | Villar
           </div>
         </div>
       </div>

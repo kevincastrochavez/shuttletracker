@@ -1,0 +1,43 @@
+.preferredStop {
+  padding: 0px 24px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: "Roboto";
+}
+
+.preferredStop p {
+  margin-top: -20px;
+  font-size: 0.7rem;
+}
+
+.preferredStop input {
+  border: 1px solid #fec007;
+}
+
+.preferredStop svg {
+  color: #fec007;
+}
+
+/* Tablet View - medium */
+@media only screen and (min-width: 720px) {
+  .preferredStop {
+    padding: 0px 30px;
+    max-width: 380px;
+  }
+}
+
+/* Desktop View - large */
+@media only screen and (min-width: 900px) {
+  .preferredStop {
+    display: flex;
+    align-items: center;
+    width: unset !important;
+    max-width: unset;
+  }
+
+  .preferredStop input {
+    width: 430px;
+  }
+}

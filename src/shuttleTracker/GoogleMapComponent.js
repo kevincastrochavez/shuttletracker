@@ -34,6 +34,10 @@ function GoogleMapComponent() {
     mapSize = "450px";
     marginRules = "10px 30px";
   }
+  // if (width >= 900) {
+  //   mapSize = "450px";
+  //   marginRules = "10px 0px";
+  // }
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,

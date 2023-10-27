@@ -4,7 +4,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: fixed;
+  z-index: 5;
+  width: 100%;
 }
+
 .navBarLogo {
   display: flex;
   justify-content: center;

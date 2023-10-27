@@ -5,7 +5,7 @@
   gap: 20px;
   background-color: white;
   padding: 20px;
-  margin: 165px 24px 24px 24px;
+  margin: 85px 24px 24px 24px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 8px;
   height: 168px;
@@ -41,12 +41,13 @@
 @media only screen and (min-width: 720px) {
   .driverContainer {
     gap: 18px;
-    margin: 165px 30px 24px 30px;
+    margin: 35px 30px 24px 30px;
   }
 }
 
 /* Desktop View - large */
 @media only screen and (min-width: 900px) {
+  /* margin: 35px 30px 24px 30px; */
 }
 
 /* Bigger View - extralarge */

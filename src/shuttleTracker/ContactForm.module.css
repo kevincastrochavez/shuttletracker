@@ -1,7 +1,7 @@
 .contactForm {
   font-family: "Roboto";
   height: 550px;
-  margin: 85px 24px;
+  margin: 135px 24px 85px 24px;
 }
 
 .contactForm p {
@@ -47,7 +47,7 @@
 /* Tablet View - medium */
 @media only screen and (min-width: 720px) {
   .contactForm {
-    margin: 85px 30px;
+    margin: 135px 30px 85px 30px;
   }
 }
 
@@ -59,7 +59,11 @@
     align-items: center;
     max-width: 1010px;
     width: 100%;
-    margin: 85px 0px !important;
+    /* margin: 85px 0px !important; */
+  }
+
+  .contactForm p {
+    margin: 25px 0px -10px 0px;
   }
 
   .contactFormEmail input {
@@ -68,5 +72,14 @@
 
   .contactFormMessage textarea {
     width: 430px;
+  }
+
+  .contactFormEmail {
+    text-align: left;
+    margin: 20px 0px 0px 0px;
+  }
+
+  .contactFormMessage {
+    text-align: left;
   }
 }

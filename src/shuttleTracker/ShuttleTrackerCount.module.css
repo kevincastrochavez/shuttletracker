@@ -53,6 +53,10 @@
   .countContainerLarge {
     margin-bottom: 25px;
   }
+
+  .countContainer {
+    margin-bottom: 0px;
+  }
 }
 
 /* Bigger View - extralarge */

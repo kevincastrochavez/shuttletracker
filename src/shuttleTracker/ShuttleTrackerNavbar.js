@@ -5,24 +5,6 @@ import logo from "./images/logo.png";
 import classes from "./ShuttleTrackerNavbar.module.css";
 
 function Footer() {
-  // const scrollToSection = (sectionId) => {
-  //   const section = document.getElementById(sectionId);
-
-  //   if (section) {
-  //     section.scrollIntoView({ behavior: "smooth" });
-  //   }
-  // };
-
-  // let navigate = useNavigate();
-  // let yourStopRef = useRef(null);
-  // let contactUsRef = useRef(null);
-  // let scrollToSection = (sectionRef) => {
-  //   sectionRef.current.scrollIntoView({ behavior: "smooth" });
-  // };
-  // useEffect(() => {
-  //   yourStopRef.current = document.getElementById("yourStop");
-  // });
-
   const scrollPositionRef = useRef(0);
   const scrollToPosition = () => {
     window.scrollTo({
@@ -35,7 +17,14 @@ function Footer() {
     <div className={classes.navBarContainer}>
       <div className={classes.navBarInfoBox}>
         <div className={classes.navBarInfoBoxSingle}>
-          <Link to="/" className={classes.navBarLogo}>
+          <Link
+            to="/"
+            className={classes.navBarLogo}
+            onClick={() => {
+              scrollPositionRef.current = 0; // Set the desired scroll position in pixels
+              scrollToPosition();
+            }}
+          >
             <img src={logo} alt="shuttle tracker logo" />
           </Link>
         </div>
@@ -55,7 +44,7 @@ function Footer() {
             to={"/"}
             className={classes.navBarInfoBoxSingleLink}
             onClick={() => {
-              scrollPositionRef.current = 260; // Set the desired scroll position in pixels
+              scrollPositionRef.current = 150; // Set the desired scroll position in pixels
               scrollToPosition();
             }}
           >
@@ -65,7 +54,7 @@ function Footer() {
             to={"/"}
             className={classes.navBarInfoBoxSingleLink}
             onClick={() => {
-              scrollPositionRef.current = 700; // Set the desired scroll position in pixels
+              scrollPositionRef.current = 500; // Set the desired scroll position in pixels
               scrollToPosition();
             }}
           >
@@ -75,7 +64,7 @@ function Footer() {
             to={"/"}
             className={classes.navBarInfoBoxSingleLink}
             onClick={() => {
-              scrollPositionRef.current = 1050; // Set the desired scroll position in pixels
+              scrollPositionRef.current = 850; // Set the desired scroll position in pixels
               scrollToPosition();
             }}
           >
@@ -85,7 +74,7 @@ function Footer() {
             to={"./"}
             className={classes.navBarInfoBoxSingleLink}
             onClick={() => {
-              scrollPositionRef.current = 1500; // Set the desired scroll position in pixels
+              scrollPositionRef.current = 1300; // Set the desired scroll position in pixels
               scrollToPosition();
             }}
           >

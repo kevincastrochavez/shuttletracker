@@ -32,6 +32,7 @@ export default function ShuttleTrackerContent() {
     <div className={classes.NavBarPageWraperFooter}>
       <ShuttleTrackerNavBar />
       <div className={classes.contentPageWrapper}>
+        <div className={classes.contentSpace}></div>
         <div className={classes.titleContainer}>SHUTTLE LIVE TRACKING</div>
 
         <>
@@ -80,8 +81,8 @@ export default function ShuttleTrackerContent() {
                     id="yourStop"
                   />
                   <GoogleMapComponent className={classes.contentMap} />
-                  <ShuttleTrackerDriver />
                   <ShuttleTrackerCount />
+                  <ShuttleTrackerDriver />
                   <ContactForm />
                 </>
               )}

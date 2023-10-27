@@ -1,7 +1,7 @@
 .countContainer {
   display: grid;
   justify-items: center;
-  margin: 130px 24px 130px 24px;
+  margin: 185px 24px 130px 24px;
   font-family: "Roboto";
 }
 
@@ -35,17 +35,24 @@
 
 .countBar {
   border-radius: 4px;
+  max-width: 400px;
 }
 
 /* Tablet View - medium */
 @media only screen and (min-width: 720px) {
   .countContainer {
-    margin: 130px 30px 130px 30px;
+    margin: 185px 30px 130px 30px;
+  }
+  .countContainerLarge {
+    margin-top: 185px;
   }
 }
 
 /* Desktop View - large */
 @media only screen and (min-width: 900px) {
+  .countContainerLarge {
+    margin-bottom: 25px;
+  }
 }
 
 /* Bigger View - extralarge */

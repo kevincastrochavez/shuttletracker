@@ -44,7 +44,7 @@ function Footer() {
             to={"/"}
             className={classes.navBarInfoBoxSingleLink}
             onClick={() => {
-              scrollPositionRef.current = 150; // Set the desired scroll position in pixels
+              scrollPositionRef.current = 280; // Set the desired scroll position in pixels
               scrollToPosition();
             }}
           >
@@ -54,7 +54,7 @@ function Footer() {
             to={"/"}
             className={classes.navBarInfoBoxSingleLink}
             onClick={() => {
-              scrollPositionRef.current = 500; // Set the desired scroll position in pixels
+              scrollPositionRef.current = 800; // Set the desired scroll position in pixels
               scrollToPosition();
             }}
           >
@@ -64,7 +64,7 @@ function Footer() {
             to={"/"}
             className={classes.navBarInfoBoxSingleLink}
             onClick={() => {
-              scrollPositionRef.current = 850; // Set the desired scroll position in pixels
+              scrollPositionRef.current = 1150; // Set the desired scroll position in pixels
               scrollToPosition();
             }}
           >
@@ -74,7 +74,7 @@ function Footer() {
             to={"./"}
             className={classes.navBarInfoBoxSingleLink}
             onClick={() => {
-              scrollPositionRef.current = 1300; // Set the desired scroll position in pixels
+              scrollPositionRef.current = 1550; // Set the desired scroll position in pixels
               scrollToPosition();
             }}
           >

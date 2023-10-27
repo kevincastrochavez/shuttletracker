@@ -81,6 +81,15 @@
   justify-content: center;
 }
 
+.footerInfoBoxSingle a {
+  color: #ffffff;
+}
+
+.footerInfoBoxSingle a:hover {
+  color: #fec007;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
 /* Tablet View - medium */
 @media only screen and (min-width: 720px) {
   .footerInfoBox {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import classes from "./ShuttleTrackerFooter.module.css";
@@ -11,6 +11,14 @@ function Footer() {
     const date = new Date().getFullYear();
     setCurrentYear(date);
   });
+
+  const scrollPositionRef = useRef(0);
+  const scrollToPosition = () => {
+    window.scrollTo({
+      top: scrollPositionRef.current,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div className={classes.footerContainer}>
@@ -47,7 +55,8 @@ function Footer() {
               to={"/"}
               className={classes.footerInfoBoxSingleLink}
               onClick={() => {
-                navigate("/");
+                scrollPositionRef.current = 0; // Set the desired scroll position in pixels
+                scrollToPosition();
               }}
             >
               YOUR STOP
@@ -56,7 +65,8 @@ function Footer() {
               to={"/"}
               className={classes.footerInfoBoxSingleLink}
               onClick={() => {
-                navigate("/");
+                scrollPositionRef.current = 150; // Set the desired scroll position in pixels
+                scrollToPosition();
               }}
             >
               MAP
@@ -65,7 +75,8 @@ function Footer() {
               to={"/"}
               className={classes.footerInfoBoxSingleLink}
               onClick={() => {
-                navigate("/");
+                scrollPositionRef.current = 850; // Set the desired scroll position in pixels
+                scrollToPosition();
               }}
             >
               DRIVER
@@ -74,7 +85,8 @@ function Footer() {
               to={"/"}
               className={classes.footerInfoBoxSingleLink}
               onClick={() => {
-                navigate("/");
+                scrollPositionRef.current = 500; // Set the desired scroll position in pixels
+                scrollToPosition();
               }}
             >
               VEHICLE & SEATS
@@ -83,7 +95,8 @@ function Footer() {
               to={"/"}
               className={classes.footerInfoBoxSingleLink}
               onClick={() => {
-                navigate("/");
+                scrollPositionRef.current = 1300; // Set the desired scroll position in pixels
+                scrollToPosition();
               }}
             >
               CONTACT US

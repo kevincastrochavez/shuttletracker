@@ -78,12 +78,15 @@ export default function ShuttleTrackerContent() {
                   )}
                   <PreferredStop
                     className={classes.contentPreferredStop}
-                    id="yourStop"
+                    id="preferredStop"
                   />
-                  <GoogleMapComponent className={classes.contentMap} />
-                  <ShuttleTrackerCount />
-                  <ShuttleTrackerDriver />
-                  <ContactForm />
+                  <GoogleMapComponent
+                    className={classes.contentMap}
+                    id="googleMapComponent"
+                  />
+                  <ShuttleTrackerCount id="shuttleTrackerCount" />
+                  <ShuttleTrackerDriver id="shuttleTrackerDriver" />
+                  <ContactForm id="contactForm" />
                 </>
               )}
             </>

@@ -20,11 +20,10 @@ import classes from './ShuttleTrackerContent.module.css';
  */
 
 export default function ShuttleTrackerContent() {
-  // const { locationLoading } = useLocation();
+  const { locationLoading } = useLocation();
   const {
     notifications: { brokenDown, deviation, reduce, traffic },
   } = useNotifications();
-  const locationLoading = true;
 
   return (
     <div className={classes.NavBarPageWraperFooter}>
@@ -41,8 +40,16 @@ export default function ShuttleTrackerContent() {
 
         <>
           {brokenDown ? (
-            <Alert variant='filled' color='red' title='Alert title'>
-              The Shuttle Tracker is currently down. Please try again later
+            <Alert
+              variant='filled'
+              color='red'
+              title='What a Bummer!'
+              mx={24}
+              mt={60}
+              mb={30}
+            >
+              The Walmart Shuttle is currently broken. Check the site again in a
+              few minutes
             </Alert>
           ) : (
             <>

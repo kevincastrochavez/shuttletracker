@@ -1,22 +1,21 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
-import classes from "./ShuttleTrackerFooter.module.css";
+import classes from './ShuttleTrackerFooter.module.css';
 
 function Footer() {
   const [currentYear, setCurrentYear] = useState(0);
-  let navigate = useNavigate();
 
   useEffect(() => {
     const date = new Date().getFullYear();
     setCurrentYear(date);
-  });
+  }, []);
 
   const scrollPositionRef = useRef(0);
   const scrollToPosition = () => {
     window.scrollTo({
       top: scrollPositionRef.current,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
@@ -32,20 +31,22 @@ function Footer() {
           </div>
           <div className={classes.footerInfoBoxSingleParagraphs}>
             <p className={classes.footerInfoBoxSingle}>
-              This website is not an official platform of{" "}
+              This website is not an official platform of{' '}
               <a
-                href="https://www.walmart.com/store/1878-rexburg-id"
-                target="_blank"
+                href='https://www.walmart.com/store/1878-rexburg-id'
+                target='_blank'
+                rel='noreferrer'
               >
                 Walmart
-              </a>{" "}
-              or{" "}
+              </a>{' '}
+              or{' '}
               <a
-                href="https://saltlakeexpress.com/contact/?gad_source=1&gclid=CjwKCAjwv-2pBhB-EiwAtsQZFCa83h1ptocokZsOxlZyNpwsbUsWsEAFPtSvJy6hUjjbSa-z7J-0sBoCfx4QAvD_BwE"
-                target="_blank"
+                href='https://saltlakeexpress.com/contact/?gad_source=1&gclid=CjwKCAjwv-2pBhB-EiwAtsQZFCa83h1ptocokZsOxlZyNpwsbUsWsEAFPtSvJy6hUjjbSa-z7J-0sBoCfx4QAvD_BwE'
+                target='_blank'
+                rel='noreferrer'
               >
                 Salt Lake Express
-              </a>{" "}
+              </a>{' '}
               . We are an independent non-profit team providing information and
               services related to the Rexburg Walmart Shuttle.
             </p>
@@ -55,20 +56,22 @@ function Footer() {
           <div className={classes.footerInfoBoxSingleTitle}>DISCLAIMER</div>
           <div className={classes.footerInfoBoxSingleParagraphs}>
             <p className={classes.footerInfoBoxSingle}>
-              Any use of the{" "}
+              Any use of the{' '}
               <a
-                href="https://www.walmart.com/store/1878-rexburg-id"
-                target="_blank"
+                href='https://www.walmart.com/store/1878-rexburg-id'
+                target='_blank'
+                rel='noreferrer'
               >
                 Walmart
-              </a>{" "}
-              or{" "}
+              </a>{' '}
+              or{' '}
               <a
-                href="https://saltlakeexpress.com/contact/?gad_source=1&gclid=CjwKCAjwv-2pBhB-EiwAtsQZFCa83h1ptocokZsOxlZyNpwsbUsWsEAFPtSvJy6hUjjbSa-z7J-0sBoCfx4QAvD_BwE"
-                target="_blank"
+                href='https://saltlakeexpress.com/contact/?gad_source=1&gclid=CjwKCAjwv-2pBhB-EiwAtsQZFCa83h1ptocokZsOxlZyNpwsbUsWsEAFPtSvJy6hUjjbSa-z7J-0sBoCfx4QAvD_BwE'
+                target='_blank'
+                rel='noreferrer'
               >
                 Salt Lake Express
-              </a>{" "}
+              </a>{' '}
               names or trademarks on this website is purely for informative
               purposes and does not imply any affiliation or endorsement by
               these companies.
@@ -79,7 +82,7 @@ function Footer() {
           <div className={classes.footerInfoBoxSingleTitle}>SECTIONS</div>
           <div className={classes.footerInfoBoxSingleLinks}>
             <Link
-              to={"/"}
+              to={'/'}
               className={classes.footerInfoBoxSingleLink}
               onClick={() => {
                 scrollPositionRef.current = 0; // Set the desired scroll position in pixels
@@ -89,7 +92,7 @@ function Footer() {
               YOUR STOP
             </Link>
             <Link
-              to={"/"}
+              to={'/'}
               className={classes.footerInfoBoxSingleLink}
               onClick={() => {
                 scrollPositionRef.current = 150; // Set the desired scroll position in pixels
@@ -99,7 +102,7 @@ function Footer() {
               MAP
             </Link>
             <Link
-              to={"/"}
+              to={'/'}
               className={classes.footerInfoBoxSingleLink}
               onClick={() => {
                 scrollPositionRef.current = 850; // Set the desired scroll position in pixels
@@ -109,7 +112,7 @@ function Footer() {
               DRIVER
             </Link>
             <Link
-              to={"/"}
+              to={'/'}
               className={classes.footerInfoBoxSingleLink}
               onClick={() => {
                 scrollPositionRef.current = 500; // Set the desired scroll position in pixels
@@ -119,7 +122,7 @@ function Footer() {
               VEHICLE & SEATS
             </Link>
             <Link
-              to={"/"}
+              to={'/'}
               className={classes.footerInfoBoxSingleLink}
               onClick={() => {
                 scrollPositionRef.current = 1300; // Set the desired scroll position in pixels

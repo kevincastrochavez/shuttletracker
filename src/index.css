@@ -3,20 +3,3 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-/* Tablet View - medium */
-@media only screen and (min-width: 720px) {
-}
-
-/* Desktop View - large */
-@media only screen and (min-width: 900px) {
-  /* * {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  } */
-}
-
-/* Bigger View - extralarge */
-@media only screen and (min-width: 1200px) {
-}

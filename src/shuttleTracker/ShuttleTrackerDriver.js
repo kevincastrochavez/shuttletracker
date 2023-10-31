@@ -1,12 +1,10 @@
-import React from "react";
-import { Avatar } from "@mantine/core";
+import React from 'react';
+import { Avatar } from '@mantine/core';
 
-import { useLocation } from "./ShuttleTrackerProvider";
-import classes from "./ShuttleTrackerDriver.module.css";
-import { useViewportSize } from "@mantine/hooks";
+import { useLocation } from './ShuttleTrackerProvider';
+import classes from './ShuttleTrackerDriver.module.css';
 
 function ShuttleTrackerDriver() {
-  const { width } = useViewportSize();
   const {
     location: {
       userInfo: { name: driverName, url: driverPicture },

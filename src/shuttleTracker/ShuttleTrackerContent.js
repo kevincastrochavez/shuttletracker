@@ -20,10 +20,11 @@ import classes from './ShuttleTrackerContent.module.css';
  */
 
 export default function ShuttleTrackerContent() {
-  const { locationLoading } = useLocation();
+  // const { locationLoading } = useLocation();
   const {
     notifications: { brokenDown, deviation, reduce, traffic },
   } = useNotifications();
+  const locationLoading = true;
 
   return (
     <div className={classes.NavBarPageWraperFooter}>

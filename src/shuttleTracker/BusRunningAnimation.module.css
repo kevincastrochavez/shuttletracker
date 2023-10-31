@@ -5,9 +5,14 @@
   font-weight: 400;
 }
 
-/* Desktop View - large */
 @media only screen and (min-width: 720px) {
   .busAnimationTitle h2 {
     padding: 0 30px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .busAnimationTitle svg {
+    width: 70% !important;
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Alert, Container, Skeleton, Space, Title } from '@mantine/core';
+import { useViewportSize } from '@mantine/hooks';
 
 import { useLocation, useNotifications } from './ShuttleTrackerProvider';
 import ShuttleTrackerSkeleton from './ShuttleTrackerSkeleton';
@@ -20,7 +21,11 @@ import classes from './ShuttleTrackerContent.module.css';
  */
 
 export default function ShuttleTrackerContent() {
-  const { locationLoading } = useLocation();
+  const { width } = useViewportSize();
+  const {
+    locationLoading,
+    location: { isDriving },
+  } = useLocation();
   const {
     notifications: { brokenDown, deviation, reduce, traffic },
   } = useNotifications();
@@ -43,7 +48,7 @@ export default function ShuttleTrackerContent() {
             variant='filled'
             color='red'
             title='What a Bummer!'
-            mx={24}
+            mx={width < 750 ? 24 : 30}
             mt={60}
             mb={30}
           >
@@ -60,30 +65,33 @@ export default function ShuttleTrackerContent() {
                 <Alert
                   variant='outline'
                   color='yellow'
-                  title='Alert title'
+                  title='Traffic!'
                   mb={20}
+                  mx={width < 750 ? 24 : 30}
                 >
-                  Heavy traffic. Times may be slower
+                  Heavy traffic present. Waiting times may be longer
                 </Alert>
               )}
               {reduce && (
                 <Alert
                   variant='outline'
-                  color='blue'
-                  title='Alert title'
+                  color='yellow'
+                  title='Holiday hours!'
                   mb={20}
+                  mx={width < 750 ? 24 : 30}
                 >
-                  Reduced Hours - Call for more information
+                  Limited schedule, plan ahead - Call for more information
                 </Alert>
               )}
               {deviation && (
                 <Alert
                   variant='outline'
-                  color='orange'
-                  title='Alert title'
+                  color='yellow'
+                  title='Taking detour!'
                   mb={20}
+                  mx={width < 750 ? 24 : 30}
                 >
-                  Bus might need to take a detour
+                  Bus might need to take a detour. Check map for live tracking
                 </Alert>
               )}
               <PreferredStop

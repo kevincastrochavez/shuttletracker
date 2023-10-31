@@ -1,0 +1,13 @@
+.busAnimationTitle h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  padding: 0 24px;
+  font-weight: 400;
+}
+
+/* Desktop View - large */
+@media only screen and (min-width: 720px) {
+  .busAnimationTitle h2 {
+    padding: 0 30px;
+  }
+}

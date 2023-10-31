@@ -1,10 +1,11 @@
 import React from 'react';
-import { Alert, Container, Skeleton, Space, Title } from '@mantine/core';
+import { Alert, Skeleton } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import {
   IconClockHour5,
   IconTrafficLights,
   IconArrowBearRight2,
+  IconLocationBroken,
 } from '@tabler/icons-react';
 
 import { useLocation, useNotifications } from './ShuttleTrackerProvider';
@@ -16,9 +17,9 @@ import ShuttleTrackerFooter from './ShuttleTrackerFooter';
 import ShuttleTrackerDriver from './ShuttleTrackerDriver';
 import ShuttleTrackerCount from './ShuttleTrackerCount';
 import ContactForm from './ContactForm';
-// import logo from "./images/logo.png";
 
 import classes from './ShuttleTrackerContent.module.css';
+import BusRunningAnimation from './BusRunningAnimation';
 
 /**
  * The main Shuttle Tracker content: stops list, minutes away & map
@@ -38,6 +39,7 @@ export default function ShuttleTrackerContent() {
   const iconClock = <IconClockHour5 />;
   const iconTraffic = <IconTrafficLights />;
   const iconDetour = <IconArrowBearRight2 />;
+  const iconBroken = <IconLocationBroken />;
 
   return (
     <div className={classes.NavBarPageWraperFooter}>
@@ -52,21 +54,24 @@ export default function ShuttleTrackerContent() {
           )}
         </div>
 
+        {!isDriving && <BusRunningAnimation />}
+
         {brokenDown && (
           <Alert
             variant='filled'
             color='red'
             title='What a Bummer!'
-            mx={width < 750 ? 24 : 30}
+            mx={width < 720 ? 24 : 30}
             mt={60}
             mb={30}
-            // icon={}
+            icon={iconBroken}
           >
             The Walmart Shuttle is currently broken. Check the site again in a
             few minutes
           </Alert>
         )}
         {!brokenDown &&
+          isDriving &&
           (locationLoading ? (
             <ShuttleTrackerSkeleton />
           ) : (
@@ -77,7 +82,7 @@ export default function ShuttleTrackerContent() {
                   color='yellow'
                   title='Traffic!'
                   mb={20}
-                  mx={width < 750 ? 24 : 30}
+                  mx={width < 720 ? 24 : 30}
                   icon={iconTraffic}
                 >
                   Heavy traffic present. Waiting times may be longer
@@ -89,7 +94,7 @@ export default function ShuttleTrackerContent() {
                   color='yellow'
                   title='Holiday hours!'
                   mb={20}
-                  mx={width < 750 ? 24 : 30}
+                  mx={width < 720 ? 24 : 30}
                   icon={iconClock}
                 >
                   Limited schedule, plan ahead - Call for more information
@@ -101,7 +106,7 @@ export default function ShuttleTrackerContent() {
                   color='yellow'
                   title='Taking detour!'
                   mb={20}
-                  mx={width < 750 ? 24 : 30}
+                  mx={width < 720 ? 24 : 30}
                   icon={iconDetour}
                 >
                   Bus might need to take a detour. Check map for live tracking

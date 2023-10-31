@@ -1,6 +1,11 @@
 import React from 'react';
 import { Alert, Container, Skeleton, Space, Title } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
+import {
+  IconClockHour5,
+  IconTrafficLights,
+  IconArrowBearRight2,
+} from '@tabler/icons-react';
 
 import { useLocation, useNotifications } from './ShuttleTrackerProvider';
 import ShuttleTrackerSkeleton from './ShuttleTrackerSkeleton';
@@ -30,6 +35,10 @@ export default function ShuttleTrackerContent() {
     notifications: { brokenDown, deviation, reduce, traffic },
   } = useNotifications();
 
+  const iconClock = <IconClockHour5 />;
+  const iconTraffic = <IconTrafficLights />;
+  const iconDetour = <IconArrowBearRight2 />;
+
   return (
     <div className={classes.NavBarPageWraperFooter}>
       <ShuttleTrackerNavBar />
@@ -51,6 +60,7 @@ export default function ShuttleTrackerContent() {
             mx={width < 750 ? 24 : 30}
             mt={60}
             mb={30}
+            // icon={}
           >
             The Walmart Shuttle is currently broken. Check the site again in a
             few minutes
@@ -68,6 +78,7 @@ export default function ShuttleTrackerContent() {
                   title='Traffic!'
                   mb={20}
                   mx={width < 750 ? 24 : 30}
+                  icon={iconTraffic}
                 >
                   Heavy traffic present. Waiting times may be longer
                 </Alert>
@@ -79,6 +90,7 @@ export default function ShuttleTrackerContent() {
                   title='Holiday hours!'
                   mb={20}
                   mx={width < 750 ? 24 : 30}
+                  icon={iconClock}
                 >
                   Limited schedule, plan ahead - Call for more information
                 </Alert>
@@ -90,6 +102,7 @@ export default function ShuttleTrackerContent() {
                   title='Taking detour!'
                   mb={20}
                   mx={width < 750 ? 24 : 30}
+                  icon={iconDetour}
                 >
                   Bus might need to take a detour. Check map for live tracking
                 </Alert>

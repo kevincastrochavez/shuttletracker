@@ -38,71 +38,67 @@ export default function ShuttleTrackerContent() {
           )}
         </div>
 
-        <>
-          {brokenDown ? (
-            <Alert
-              variant='filled'
-              color='red'
-              title='What a Bummer!'
-              mx={24}
-              mt={60}
-              mb={30}
-            >
-              The Walmart Shuttle is currently broken. Check the site again in a
-              few minutes
-            </Alert>
+        {brokenDown && (
+          <Alert
+            variant='filled'
+            color='red'
+            title='What a Bummer!'
+            mx={24}
+            mt={60}
+            mb={30}
+          >
+            The Walmart Shuttle is currently broken. Check the site again in a
+            few minutes
+          </Alert>
+        )}
+        {!brokenDown &&
+          (locationLoading ? (
+            <ShuttleTrackerSkeleton />
           ) : (
             <>
-              {locationLoading && !brokenDown ? (
-                <ShuttleTrackerSkeleton />
-              ) : (
-                <>
-                  {traffic && (
-                    <Alert
-                      variant='outline'
-                      color='yellow'
-                      title='Alert title'
-                      mb={20}
-                    >
-                      Heavy traffic. Times may be slower
-                    </Alert>
-                  )}
-                  {reduce && (
-                    <Alert
-                      variant='outline'
-                      color='blue'
-                      title='Alert title'
-                      mb={20}
-                    >
-                      Reduced Hours - Call for more information
-                    </Alert>
-                  )}
-                  {deviation && (
-                    <Alert
-                      variant='outline'
-                      color='orange'
-                      title='Alert title'
-                      mb={20}
-                    >
-                      Bus might need to take a detour
-                    </Alert>
-                  )}
-                  <PreferredStop
-                    className={classes.contentPreferredStop}
-                    id='preferredStop'
-                  />
-                  <GoogleMapComponent
-                    className={classes.contentMap}
-                    id='googleMapComponent'
-                  />
-                  <ShuttleTrackerCount id='shuttleTrackerCount' />
-                  <ShuttleTrackerDriver id='shuttleTrackerDriver' />
-                  <ContactForm id='contactForm' />
-                </>
+              {traffic && (
+                <Alert
+                  variant='outline'
+                  color='yellow'
+                  title='Alert title'
+                  mb={20}
+                >
+                  Heavy traffic. Times may be slower
+                </Alert>
               )}
+              {reduce && (
+                <Alert
+                  variant='outline'
+                  color='blue'
+                  title='Alert title'
+                  mb={20}
+                >
+                  Reduced Hours - Call for more information
+                </Alert>
+              )}
+              {deviation && (
+                <Alert
+                  variant='outline'
+                  color='orange'
+                  title='Alert title'
+                  mb={20}
+                >
+                  Bus might need to take a detour
+                </Alert>
+              )}
+              <PreferredStop
+                className={classes.contentPreferredStop}
+                id='preferredStop'
+              />
+              <GoogleMapComponent
+                className={classes.contentMap}
+                id='googleMapComponent'
+              />
+              <ShuttleTrackerCount id='shuttleTrackerCount' />
+              <ShuttleTrackerDriver id='shuttleTrackerDriver' />
+              <ContactForm id='contactForm' />
             </>
-          )}
-        </>
+          ))}
       </div>
       <ShuttleTrackerFooter />
     </div>

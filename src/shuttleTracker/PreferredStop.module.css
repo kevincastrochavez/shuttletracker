@@ -1,15 +1,10 @@
 .preferredStop {
   padding: 0px 24px;
-  height: 110px;
+  height: 70px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-family: "Roboto";
-}
-
-.preferredStop p {
-  margin-top: -20px;
-  font-size: 0.7rem;
+  font-family: 'Roboto';
 }
 
 .preferredStop input {

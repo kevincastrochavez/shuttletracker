@@ -1,3 +1,7 @@
+.skeletonContainer {
+  padding: 30px 24px;
+}
+
 .avatarContainer {
   display: grid;
   grid-template-columns: 100px 1fr;

@@ -9,7 +9,7 @@ import classes from './ShuttleTrackerSkeleton.module.css';
  */
 function ShuttleTrackerSkeleton() {
   return (
-    <>
+    <div className={classes.skeletonContainer}>
       <Skeleton height={16} mt={6} radius='xl' width={'60%'} />
       <Skeleton height={14} mt={6} radius='xl' width={'75%'} />
       <Skeleton height={40} mt={6} radius='md' />
@@ -22,7 +22,7 @@ function ShuttleTrackerSkeleton() {
           <Skeleton height={16} mt={6} radius='xl' width={'75%'} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

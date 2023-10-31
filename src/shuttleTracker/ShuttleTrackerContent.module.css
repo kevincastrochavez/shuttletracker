@@ -13,7 +13,7 @@
   font-family: 'Roboto';
   font-size: 1.8rem;
   font-weight: 500;
-  height: 60px;
+  height: 90px;
   padding: 0 24px;
   margin-bottom: 30px;
 }
@@ -21,6 +21,13 @@
   width: 60px;
   height: 60px;
   object-fit: cover;
+}
+
+/* Tablet View - medium */
+@media only screen and (min-width: 384px) {
+  .titleContainer {
+    height: 60px;
+  }
 }
 
 /* Tablet View - medium */

@@ -74,7 +74,10 @@ function GoogleMapComponent() {
   const onLoad = React.useCallback(
     async function callback(map) {
       setMap(map);
-      const walmartCoords = { lat: 43.854752, lng: -111.777962 };
+      const walmartCoords = {
+        lat: 43.85633241609863,
+        lng: -111.77465905384925,
+      };
 
       // Get directions
       const google = window.google;
@@ -85,44 +88,59 @@ function GoogleMapComponent() {
         destination: walmartCoords,
         waypoints: [
           {
-            location: { lat: 43.81778, lng: -111.78084 },
+            // MC
+            location: { lat: 43.81770587485943, lng: -111.78097590122007 },
             stopover: true,
           },
           {
-            location: { lat: 43.814201, lng: -111.778122 },
+            // Aspen Village
+            location: { lat: 43.813951265739014, lng: -111.77687831416215 },
             stopover: true,
           },
           {
+            // Point to redirect route
+            location: { lat: 43.81358932622403, lng: -111.78411066620575 },
+            stopover: false,
+          },
+          {
+            // Center Square
             location: { lat: 43.81180247920654, lng: -111.78677373375258 },
             stopover: true,
           },
           {
+            // The Gates
             location: { lat: 43.813570621409866, lng: -111.79428811938575 },
             stopover: true,
           },
           {
+            // Point to redirect route
             location: { lat: 43.81561946956219, lng: -111.79476980506578 },
             stopover: false,
           },
           {
-            location: { lat: 43.8155133, lng: -111.7903156 },
+            // Camden Apartments
+            location: { lat: 43.81560399540041, lng: -111.7903517882398 },
             stopover: true,
           },
           {
-            location: { lat: 43.817596, lng: -111.788459 },
+            // Colonial House
+            location: { lat: 43.81769451560912, lng: -111.78818646234022 },
             stopover: true,
           },
           {
-            location: { lat: 43.8195804, lng: -111.7868141 },
+            // Hart Building
+            location: { lat: 43.81920198334671, lng: -111.78664755368018 },
             stopover: true,
           },
           {
+            // Snow Building
             location: { lat: 43.8221074545991, lng: -111.78322995479034 },
             stopover: true,
           },
           {
-            location: { lat: 43.8297894, lng: -111.7839334 },
-            stopover: true,
+            // Point to redirect route
+            location: { lat: 43.82605882374381, lng: -111.783811649418 },
+            stopover: false,
           },
         ],
         travelMode: 'DRIVING',

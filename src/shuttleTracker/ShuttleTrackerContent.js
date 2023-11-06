@@ -1,25 +1,25 @@
-import React from 'react';
-import { Alert, Skeleton } from '@mantine/core';
-import { useViewportSize } from '@mantine/hooks';
+import React from "react";
+import { Alert, Skeleton } from "@mantine/core";
+import { useViewportSize } from "@mantine/hooks";
 import {
   IconClockHour5,
   IconTrafficLights,
   IconArrowBearRight2,
   IconLocationBroken,
-} from '@tabler/icons-react';
+} from "@tabler/icons-react";
 
-import { useLocation, useNotifications } from './ShuttleTrackerProvider';
-import ShuttleTrackerSkeleton from './ShuttleTrackerSkeleton';
-import PreferredStop from './PreferredStop';
-import GoogleMapComponent from './GoogleMapComponent';
-import ShuttleTrackerNavBar from './ShuttleTrackerNavbar';
-import ShuttleTrackerFooter from './ShuttleTrackerFooter';
-import ShuttleTrackerDriver from './ShuttleTrackerDriver';
-import ShuttleTrackerCount from './ShuttleTrackerCount';
-import ContactForm from './ContactForm';
+import { useLocation, useNotifications } from "./ShuttleTrackerProvider";
+import ShuttleTrackerSkeleton from "./ShuttleTrackerSkeleton";
+import PreferredStop from "./PreferredStop";
+import GoogleMapComponent from "./GoogleMapComponent";
+import ShuttleTrackerNavBar from "./ShuttleTrackerNavbar";
+import ShuttleTrackerFooter from "./ShuttleTrackerFooter";
+import ShuttleTrackerDriver from "./ShuttleTrackerDriver";
+import ShuttleTrackerCount from "./ShuttleTrackerCount";
+import ContactForm from "./ContactForm";
 
-import classes from './ShuttleTrackerContent.module.css';
-import BusRunningAnimation from './BusRunningAnimation';
+import classes from "./ShuttleTrackerContent.module.css";
+import BusRunningAnimation from "./BusRunningAnimation";
 
 /**
  * The main Shuttle Tracker content: stops list, minutes away & map
@@ -48,9 +48,9 @@ export default function ShuttleTrackerContent() {
         <div className={classes.contentSpace}></div>
         <div className={classes.titleContainer}>
           {locationLoading ? (
-            <Skeleton height={40} mt={6} radius='xl' width={'80%'} />
+            <Skeleton height={40} mt={6} radius="xl" width={"80%"} />
           ) : (
-            'SHUTTLE LIVE TRACKING'
+            "SHUTTLE LIVE TRACKING"
           )}
         </div>
 
@@ -58,9 +58,9 @@ export default function ShuttleTrackerContent() {
 
         {brokenDown && (
           <Alert
-            variant='filled'
-            color='red'
-            title='What a Bummer!'
+            variant="filled"
+            color="red"
+            title="What a Bummer!"
             mx={width < 720 ? 24 : 30}
             mt={60}
             mb={30}
@@ -78,9 +78,9 @@ export default function ShuttleTrackerContent() {
             <>
               {traffic && (
                 <Alert
-                  variant='outline'
-                  color='yellow'
-                  title='Traffic!'
+                  variant="outline"
+                  color="yellow"
+                  title="Traffic!"
                   mb={20}
                   mx={width < 720 ? 24 : 30}
                   icon={iconTraffic}
@@ -90,9 +90,9 @@ export default function ShuttleTrackerContent() {
               )}
               {reduce && (
                 <Alert
-                  variant='outline'
-                  color='yellow'
-                  title='Holiday hours!'
+                  variant="outline"
+                  color="yellow"
+                  title="Holiday hours!"
                   mb={20}
                   mx={width < 720 ? 24 : 30}
                   icon={iconClock}
@@ -102,9 +102,9 @@ export default function ShuttleTrackerContent() {
               )}
               {deviation && (
                 <Alert
-                  variant='outline'
-                  color='yellow'
-                  title='Taking detour!'
+                  variant="outline"
+                  color="yellow"
+                  title="Taking detour!"
                   mb={20}
                   mx={width < 720 ? 24 : 30}
                   icon={iconDetour}
@@ -114,15 +114,15 @@ export default function ShuttleTrackerContent() {
               )}
               <PreferredStop
                 className={classes.contentPreferredStop}
-                id='preferredStop'
+                id="preferredStop"
               />
               <GoogleMapComponent
                 className={classes.contentMap}
-                id='googleMapComponent'
+                id="googleMapComponent"
               />
-              <ShuttleTrackerCount id='shuttleTrackerCount' />
-              <ShuttleTrackerDriver id='shuttleTrackerDriver' />
-              <ContactForm id='contactForm' />
+              <ShuttleTrackerCount id="shuttleTrackerCount" />
+              <ShuttleTrackerDriver id="shuttleTrackerDriver" />
+              <ContactForm id="contactForm" />
             </>
           ))}
       </div>

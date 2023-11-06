@@ -12,6 +12,7 @@ import classes from './GoogleMapComponent.module.css';
 
 import { useBusInfo, usePreferredStop } from './ShuttleTrackerProvider';
 import marker from './images/navigation.svg';
+import stopMarker from './images/stop.svg';
 import busStopsObj from './busStopsList';
 import MinutesAway from './MinutesAway';
 // import usePrevious, { useGetHeading } from './utils';
@@ -192,7 +193,7 @@ function GoogleMapComponent() {
           }}
         >
           {waypointMarkersLocation.map((waypointPosition) => (
-            <Marker position={waypointPosition} map={map} />
+            <Marker position={waypointPosition} map={map} icon={stopMarker} />
           ))}
           <Marker position={busLocation} icon={marker} map={map} />
           {directionsResponse && (

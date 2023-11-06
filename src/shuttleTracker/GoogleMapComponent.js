@@ -171,7 +171,6 @@ function GoogleMapComponent() {
           m={marginRules}
           className={classes.googleMapComponentMap}
           onLoad={(map) => {
-            console.log(map);
             onLoad(map);
           }}
           onZoomChanged={(map) => map}
@@ -186,7 +185,10 @@ function GoogleMapComponent() {
         >
           <Marker position={busLocation} icon={marker} map={map} />
           {directionsResponse && (
-            <DirectionsRenderer directions={directionsResponse} />
+            <DirectionsRenderer
+              directions={directionsResponse}
+              options={{ suppressMarkers: true }}
+            />
           )}
         </GoogleMap>
       </Box>

@@ -14,13 +14,13 @@ import { useBusInfo, usePreferredStop } from './ShuttleTrackerProvider';
 import marker from './images/navigation.svg';
 import busStopsObj from './busStopsList';
 import MinutesAway from './MinutesAway';
-import usePrevious, { useGetHeading } from './utils';
+// import usePrevious, { useGetHeading } from './utils';
 
 function GoogleMapComponent() {
-  const middleOfRexburgCoords = {
-    lat: 43.82402030515836,
-    lng: -111.78097057734374,
-  };
+  // const middleOfRexburgCoords = {
+  //   lat: 43.82402030515836,
+  //   lng: -111.78097057734374,
+  // };
   const { width } = useViewportSize();
   let mapSize;
   let marginRules;
@@ -41,7 +41,7 @@ function GoogleMapComponent() {
   const [map, setMap] = useState(null);
   const [nearDirectionsResponse, setNearDirectionsResponse] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
-  const center = middleOfRexburgCoords;
+  // const center = middleOfRexburgCoords;
   const { busLocation } = useBusInfo();
   const { stopSelected } = usePreferredStop();
   const stopSelectedCoords = busStopsObj.filter(
@@ -49,18 +49,101 @@ function GoogleMapComponent() {
   )[0];
   const { location: preferredLocationSelected } =
     stopSelectedCoords[stopSelected];
-  const previousLocation = usePrevious(busLocation);
+  // const previousLocation = usePrevious(busLocation);
 
   // Get car heading direction and apply styles accordingly
-  const value = useGetHeading(
-    [previousLocation?.lat, previousLocation?.lng],
-    [busLocation?.lat, busLocation?.lng]
-  );
+  // const value = useGetHeading(
+  //   [previousLocation?.lat, previousLocation?.lng],
+  //   [busLocation?.lat, busLocation?.lng]
+  // );
 
-  const updateMap = async () => {
+  // const updateMap = async () => {
+  //   // Get directions
+  //   const google = window.google;
+  //   const directionsService = new google.maps.DirectionsService();
+
+  //   const nearStopRoute = await directionsService.route({
+  //     origin: preferredLocationSelected,
+  //     destination: busLocation,
+  //     travelMode: 'DRIVING',
+  //   });
+
+  //   setNearDirectionsResponse(nearStopRoute);
+  // };
+
+  const onLoad = React.useCallback(async function callback(map) {
+    setMap(map);
+    const walmartCoords = {
+      lat: 43.85633241609863,
+      lng: -111.77465905384925,
+    };
+
     // Get directions
     const google = window.google;
     const directionsService = new google.maps.DirectionsService();
+
+    const completeRouteData = await directionsService.route({
+      origin: walmartCoords,
+      destination: walmartCoords,
+      waypoints: [
+        {
+          // MC
+          location: { lat: 43.81770587485943, lng: -111.78097590122007 },
+          stopover: true,
+        },
+        {
+          // Aspen Village
+          location: { lat: 43.813951265739014, lng: -111.77687831416215 },
+          stopover: true,
+        },
+        {
+          // Point to redirect route
+          location: { lat: 43.81358932622403, lng: -111.78411066620575 },
+          stopover: false,
+        },
+        {
+          // Center Square
+          location: { lat: 43.81180247920654, lng: -111.78677373375258 },
+          stopover: true,
+        },
+        {
+          // The Gates
+          location: { lat: 43.813570621409866, lng: -111.79428811938575 },
+          stopover: true,
+        },
+        {
+          // Point to redirect route
+          location: { lat: 43.81561946956219, lng: -111.79476980506578 },
+          stopover: false,
+        },
+        {
+          // Camden Apartments
+          location: { lat: 43.81560399540041, lng: -111.7903517882398 },
+          stopover: true,
+        },
+        {
+          // Colonial House
+          location: { lat: 43.81769451560912, lng: -111.78818646234022 },
+          stopover: true,
+        },
+        {
+          // Hart Building
+          location: { lat: 43.81920198334671, lng: -111.78664755368018 },
+          stopover: true,
+        },
+        {
+          // Snow Building
+          location: { lat: 43.8221074545991, lng: -111.78322995479034 },
+          stopover: true,
+        },
+        {
+          // Point to redirect route
+          location: { lat: 43.82605882374381, lng: -111.783811649418 },
+          stopover: false,
+        },
+      ],
+      travelMode: 'DRIVING',
+    });
 
     const nearStopRoute = await directionsService.route({
       origin: preferredLocationSelected,
@@ -68,95 +151,9 @@ function GoogleMapComponent() {
       travelMode: 'DRIVING',
     });
 
+    setDirectionsResponse(completeRouteData);
     setNearDirectionsResponse(nearStopRoute);
-  };
-
-  const onLoad = React.useCallback(
-    async function callback(map) {
-      setMap(map);
-      const walmartCoords = {
-        lat: 43.85633241609863,
-        lng: -111.77465905384925,
-      };
-
-      // Get directions
-      const google = window.google;
-      const directionsService = new google.maps.DirectionsService();
-
-      const completeRouteData = await directionsService.route({
-        origin: walmartCoords,
-        destination: walmartCoords,
-        waypoints: [
-          {
-            // MC
-            location: { lat: 43.81770587485943, lng: -111.78097590122007 },
-            stopover: true,
-          },
-          {
-            // Aspen Village
-            location: { lat: 43.813951265739014, lng: -111.77687831416215 },
-            stopover: true,
-          },
-          {
-            // Point to redirect route
-            location: { lat: 43.81358932622403, lng: -111.78411066620575 },
-            stopover: false,
-          },
-          {
-            // Center Square
-            location: { lat: 43.81180247920654, lng: -111.78677373375258 },
-            stopover: true,
-          },
-          {
-            // The Gates
-            location: { lat: 43.813570621409866, lng: -111.79428811938575 },
-            stopover: true,
-          },
-          {
-            // Point to redirect route
-            location: { lat: 43.81561946956219, lng: -111.79476980506578 },
-            stopover: false,
-          },
-          {
-            // Camden Apartments
-            location: { lat: 43.81560399540041, lng: -111.7903517882398 },
-            stopover: true,
-          },
-          {
-            // Colonial House
-            location: { lat: 43.81769451560912, lng: -111.78818646234022 },
-            stopover: true,
-          },
-          {
-            // Hart Building
-            location: { lat: 43.81920198334671, lng: -111.78664755368018 },
-            stopover: true,
-          },
-          {
-            // Snow Building
-            location: { lat: 43.8221074545991, lng: -111.78322995479034 },
-            stopover: true,
-          },
-          {
-            // Point to redirect route
-            location: { lat: 43.82605882374381, lng: -111.783811649418 },
-            stopover: false,
-          },
-        ],
-        travelMode: 'DRIVING',
-      });
-
-      const nearStopRoute = await directionsService.route({
-        origin: preferredLocationSelected,
-        destination: busLocation,
-        travelMode: 'DRIVING',
-      });
-
-      setDirectionsResponse(completeRouteData);
-      setNearDirectionsResponse(nearStopRoute);
-    },
-    [busLocation, preferredLocationSelected]
-  );
+  }, []);
 
   if (!isLoaded) return <Skeleton height={400} radius='md' />;
 
@@ -173,8 +170,8 @@ function GoogleMapComponent() {
         <GoogleMap
           m={marginRules}
           className={classes.googleMapComponentMap}
-          defaultZoom={14}
           onLoad={(map) => {
+            console.log(map);
             onLoad(map);
           }}
           onZoomChanged={(map) => map}
@@ -184,14 +181,10 @@ function GoogleMapComponent() {
             zoomControl: false,
             streetViewControl: false,
             mapTypeControl: false,
+            mapId: '84f24b345e664424',
           }}
         >
-          <Marker
-            position={busLocation}
-            icon={marker}
-            map={map}
-            center={center}
-          />
+          <Marker position={busLocation} icon={marker} map={map} />
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}

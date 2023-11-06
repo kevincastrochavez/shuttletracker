@@ -11,7 +11,7 @@ import { useViewportSize } from '@mantine/hooks';
 import classes from './GoogleMapComponent.module.css';
 
 import { useBusInfo, usePreferredStop } from './ShuttleTrackerProvider';
-import marker from './images/marker.png';
+import marker from './images/navigation.svg';
 import busStopsObj from './busStopsList';
 import MinutesAway from './MinutesAway';
 import usePrevious, { useGetHeading } from './utils';

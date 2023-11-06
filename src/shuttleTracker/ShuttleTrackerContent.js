@@ -54,8 +54,6 @@ export default function ShuttleTrackerContent() {
           )}
         </div>
 
-        {!isDriving && <BusRunningAnimation />}
-
         {brokenDown && (
           <Alert
             variant='filled'
@@ -71,10 +69,9 @@ export default function ShuttleTrackerContent() {
           </Alert>
         )}
         {!brokenDown &&
-          isDriving &&
           (locationLoading ? (
             <ShuttleTrackerSkeleton />
-          ) : (
+          ) : isDriving ? (
             <>
               {traffic && (
                 <Alert
@@ -124,6 +121,8 @@ export default function ShuttleTrackerContent() {
               <ShuttleTrackerDriver id='shuttleTrackerDriver' />
               <ContactForm id='contactForm' />
             </>
+          ) : (
+            <BusRunningAnimation />
           ))}
       </div>
       <ShuttleTrackerFooter />

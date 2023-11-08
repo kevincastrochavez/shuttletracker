@@ -32,10 +32,14 @@ export default function ShuttleTrackerProvider({
   const [value] = useStorage('preferredBusStop', 'BYU-I Hart');
   const [stopSelected, setStopSelected] = useState(() => value);
   const { busType } = carType;
-  const dayDate = new Date().getDate();
-  const monthDate = new Date().getMonth() + 1;
-  const yearDate = new Date().getFullYear();
-  const todaysDate = `${monthDate}-${dayDate}-${yearDate}`;
+  // TODO: Use this when database is updated with stops
+  // const dayDate = new Date().getDate();
+  // const monthDate = new Date().getMonth() + 1;
+  // const yearDate = new Date().getFullYear();
+  // const formattedTodaysDate = `${monthDate}-${dayDate}-${yearDate}`;
+  const formattedTodaysDate = '10-21-2023';
+
+  const lastBusStop = getLastStop(formattedTodaysDate, passengerCount);
 
   const isBus = busType === 'bus';
   const busSeats = 42;
@@ -43,7 +47,7 @@ export default function ShuttleTrackerProvider({
   const totalSeats = isBus ? busSeats : vanSeats;
   let seatsAvailable;
 
-  const stopsCountObjPerDay = passengerCount?.[todaysDate];
+  const stopsCountObjPerDay = passengerCount?.[formattedTodaysDate];
   stopsCountObjPerDay !== undefined &&
     Object.values(stopsCountObjPerDay)
       .map((stopObj) => {
@@ -86,6 +90,7 @@ export default function ShuttleTrackerProvider({
           seatsAvailable,
           totalSeats,
           notifications,
+          lastBusStop,
         }}
       >
         {children}
@@ -95,13 +100,13 @@ export default function ShuttleTrackerProvider({
 }
 
 /**
- * Provides a list of bus stops, bus location, available seats and total seats
- * @returns {{busStopsList, busLocation, seatsAvailable, }}
+ * Provides a list of bus stops, bus location, available seats, total seats and last bus stop the shuttle was at
+ * @returns {{busStopsList, busLocation, seatsAvailable, lastBusStop}}
  */
 export function useBusInfo() {
-  const { busStopsList, busLocation, seatsAvailable, totalSeats } =
+  const { busStopsList, busLocation, seatsAvailable, totalSeats, lastBusStop } =
     useShuttleTrackerProvider('useBusInfo');
-  return { busStopsList, busLocation, seatsAvailable, totalSeats };
+  return { busStopsList, busLocation, seatsAvailable, totalSeats, lastBusStop };
 }
 
 /**
@@ -159,6 +164,24 @@ export function useSetPreferredStop() {
     'useSetPreferredStop'
   );
   return { setStopSelected };
+}
+
+/* PRIVATE FUNCTIONS */
+
+/**
+ * Returns the last bus stop the shuttle stopped at
+ * @param {string} todaysDate - today's date
+ * @param {object} passengerCountObj - object containing passenger count information, including stops
+ * @returns {string} last bus stop
+ */
+function getLastStop(todaysDate, passengerCountObj) {
+  const todaysInfo = passengerCountObj[todaysDate];
+  const todaysInfoList = todaysInfo && Object.values(todaysInfo);
+  const lastStop =
+    todaysInfoList?.length > 0 &&
+    todaysInfoList[todaysInfoList.length - 1]?.selectedPlace;
+
+  return lastStop;
 }
 
 /**

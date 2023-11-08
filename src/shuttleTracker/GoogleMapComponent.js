@@ -106,9 +106,6 @@ function GoogleMapComponent() {
     setUserLongitude(coords.longitude);
   });
 
-  console.log(userLatitude);
-  console.log(userLongitude);
-
   // Get car heading direction and apply styles accordingly
   // const value = useGetHeading(
   //   [previousLocation?.lat, previousLocation?.lng],
@@ -129,10 +126,6 @@ function GoogleMapComponent() {
   //   setNearDirectionsResponse(nearStopRoute);
   // };
 
-  // const middleOfRexburgCoords = {
-  //   lat: 43.82402030515836,
-  //   lng: -111.78097057734374,
-  // };
   const { width } = useViewportSize();
   let mapSize;
   let marginRules;

@@ -19,6 +19,11 @@ import MinutesAway from './MinutesAway';
 
 const WAYPOINTS_LIST = [
   {
+    // Point to redirect route
+    location: { lat: 43.85679807613483, lng: -111.77639721690906 },
+    stopover: false,
+  },
+  {
     // MC
     location: { lat: 43.81770587485943, lng: -111.78097590122007 },
     stopover: true,

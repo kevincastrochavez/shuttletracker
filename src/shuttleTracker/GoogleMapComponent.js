@@ -12,6 +12,7 @@ import classes from './GoogleMapComponent.module.css';
 
 import { useBusInfo, usePreferredStop } from './ShuttleTrackerProvider';
 import marker from './images/navigation.svg';
+import userMarker from './images/user.svg';
 import stopMarker from './images/stop.svg';
 import busStopsObj from './busStopsList';
 import MinutesAway from './MinutesAway';
@@ -86,31 +87,11 @@ const walmartCoords = {
 };
 
 function GoogleMapComponent() {
-  // const middleOfRexburgCoords = {
-  //   lat: 43.82402030515836,
-  //   lng: -111.78097057734374,
-  // };
-  const { width } = useViewportSize();
-  let mapSize;
-  let marginRules;
-
-  if (width <= 720) {
-    mapSize = '450px';
-    marginRules = '10px 24px';
-  }
-  if (width > 720) {
-    mapSize = '450px';
-    marginRules = '10px 30px';
-  }
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
-
   const [map, setMap] = useState(null);
   const [nearDirectionsResponse, setNearDirectionsResponse] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
-  // const center = middleOfRexburgCoords;
+  const [userLatitude, setUserLatitude] = useState(0);
+  const [userLongitude, setUserLongitude] = useState(0);
   const { busLocation } = useBusInfo();
   const { stopSelected } = usePreferredStop();
   const stopSelectedCoords = busStopsObj.filter(
@@ -119,6 +100,14 @@ function GoogleMapComponent() {
   const { location: preferredLocationSelected } =
     stopSelectedCoords[stopSelected];
   // const previousLocation = usePrevious(busLocation);
+
+  navigator.geolocation.watchPosition(function ({ coords }) {
+    setUserLatitude(coords.latitude);
+    setUserLongitude(coords.longitude);
+  });
+
+  console.log(userLatitude);
+  console.log(userLongitude);
 
   // Get car heading direction and apply styles accordingly
   // const value = useGetHeading(
@@ -139,6 +128,27 @@ function GoogleMapComponent() {
 
   //   setNearDirectionsResponse(nearStopRoute);
   // };
+
+  // const middleOfRexburgCoords = {
+  //   lat: 43.82402030515836,
+  //   lng: -111.78097057734374,
+  // };
+  const { width } = useViewportSize();
+  let mapSize;
+  let marginRules;
+
+  if (width <= 720) {
+    mapSize = '450px';
+    marginRules = '10px 24px';
+  }
+  if (width > 720) {
+    mapSize = '450px';
+    marginRules = '10px 30px';
+  }
+
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+  });
 
   const onLoad = React.useCallback(async function callback(map) {
     setMap(map);
@@ -187,8 +197,6 @@ function GoogleMapComponent() {
           onLoad={(map) => {
             onLoad(map);
           }}
-          onZoomChanged={(map) => map}
-          onDrag={(map) => map}
           mapContainerStyle={{ height: '450px' }}
           options={{
             zoomControl: false,
@@ -197,10 +205,22 @@ function GoogleMapComponent() {
             mapId: '84f24b345e664424',
           }}
         >
-          {waypointMarkersLocation.map((waypointPosition) => (
-            <Marker position={waypointPosition} map={map} icon={stopMarker} />
+          {waypointMarkersLocation.map((waypointPosition, index) => (
+            <Marker
+              key={index}
+              position={waypointPosition}
+              map={map}
+              icon={stopMarker}
+            />
           ))}
           <Marker position={busLocation} icon={marker} map={map} />
+          {userLatitude !== 0 && userLongitude !== 0 && (
+            <Marker
+              position={{ lat: userLatitude, lng: userLongitude }}
+              map={map}
+              icon={userMarker}
+            />
+          )}
           {directionsResponse && (
             <DirectionsRenderer
               directions={directionsResponse}

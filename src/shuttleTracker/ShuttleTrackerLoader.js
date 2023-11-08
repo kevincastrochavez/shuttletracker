@@ -20,7 +20,6 @@ export default function ShuttleTrackerLoader({ children }) {
     'Colonial House',
     'BYU-I Hart',
     'BYU-I Parking Lot',
-    'Rexburg Floral',
   ];
 
   const [location, setLocation] = useState({});

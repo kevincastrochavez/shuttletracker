@@ -14,9 +14,7 @@ import { useBusInfo, usePreferredStop } from './ShuttleTrackerProvider';
 import marker from './images/navigation.svg';
 import userMarker from './images/user.svg';
 import stopMarker from './images/stop.svg';
-import busStopsObj from './busStopsList';
 import MinutesAway from './MinutesAway';
-// import usePrevious, { useGetHeading } from './utils';
 
 const WAYPOINTS_LIST = [
   {
@@ -86,45 +84,37 @@ const walmartCoords = {
   lng: -111.77465905384925,
 };
 
+const stopsList = [
+  'Walmart',
+  'East MC Circle',
+  'Aspen Village',
+  'Center Square',
+  'The Gates',
+  'Camden Apartments',
+  'Colonial House',
+  'BYU-I Hart',
+  'BYU-I Parking Lot',
+];
+
 function GoogleMapComponent() {
   const [map, setMap] = useState(null);
-  const [nearDirectionsResponse, setNearDirectionsResponse] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [userLatitude, setUserLatitude] = useState(0);
   const [userLongitude, setUserLongitude] = useState(0);
-  const { busLocation } = useBusInfo();
+  const { busLocation, lastBusStop } = useBusInfo();
   const { stopSelected } = usePreferredStop();
-  const stopSelectedCoords = busStopsObj.filter(
-    (stop) => Object.keys(stop)[0] === stopSelected
-  )[0];
-  const { location: preferredLocationSelected } =
-    stopSelectedCoords[stopSelected];
-  // const previousLocation = usePrevious(busLocation);
+
+  const routeLegsParsed = parseRouteLegs(directionsResponse);
+  const minutesAway = getMinutesAway(
+    routeLegsParsed,
+    stopSelected,
+    lastBusStop
+  );
 
   navigator.geolocation.watchPosition(function ({ coords }) {
     setUserLatitude(coords.latitude);
     setUserLongitude(coords.longitude);
   });
-
-  // Get car heading direction and apply styles accordingly
-  // const value = useGetHeading(
-  //   [previousLocation?.lat, previousLocation?.lng],
-  //   [busLocation?.lat, busLocation?.lng]
-  // );
-
-  // const updateMap = async () => {
-  //   // Get directions
-  //   const google = window.google;
-  //   const directionsService = new google.maps.DirectionsService();
-
-  //   const nearStopRoute = await directionsService.route({
-  //     origin: preferredLocationSelected,
-  //     destination: busLocation,
-  //     travelMode: 'DRIVING',
-  //   });
-
-  //   setNearDirectionsResponse(nearStopRoute);
-  // };
 
   const { width } = useViewportSize();
   let mapSize;
@@ -157,14 +147,7 @@ function GoogleMapComponent() {
       travelMode: 'DRIVING',
     });
 
-    const nearStopRoute = await directionsService.route({
-      origin: preferredLocationSelected,
-      destination: busLocation,
-      travelMode: 'DRIVING',
-    });
-
     setDirectionsResponse(completeRouteData);
-    setNearDirectionsResponse(nearStopRoute);
   }, []);
 
   if (!isLoaded) return <Skeleton height={400} radius='md' />;
@@ -183,7 +166,7 @@ function GoogleMapComponent() {
       m={marginRules}
     >
       <Box position='absolute' left={0} top={0} h={mapSize} w='100%'>
-        <MinutesAway nearDirectionsResponse={nearDirectionsResponse} />
+        <MinutesAway minutesAway={minutesAway} />
         <GoogleMap
           m={marginRules}
           className={classes.googleMapComponentMap}
@@ -227,3 +210,75 @@ function GoogleMapComponent() {
 }
 
 export default GoogleMapComponent;
+
+/* PRIVATE FUNCTIONS */
+
+/**
+ * Manipulates and returns the route with bus stops
+ * @param {[Object]} WAYPOINTS_LIST - location and stop type
+ * @returns {[Object]} routeLegsWithBusStop
+ */
+const parseRouteLegs = (WAYPOINTS_LIST) => {
+  const routeLegs = WAYPOINTS_LIST?.routes[0]?.legs;
+  const routeLegsWithBusStop = routeLegs?.map(
+    ({ duration, start_address, end_address }, index) => {
+      return { duration, start_address, end_address, stop: stopsList[index] };
+    }
+  );
+
+  return routeLegsWithBusStop;
+};
+
+/**
+ * Returns the minutes the bus is away from your
+ * @param {[Object]} routeLegsParsed - complete route with stop names
+ * @param {String} stopSelected - stop selected as preferred by the user
+ * @param {String} lastBusStop - last stop the bus was at
+ * @returns {Number} number of minutes the bus is away from the selected stop
+ */
+const getMinutesAway = (routeLegsParsed, stopSelected, lastBusStop) => {
+  let stopSelectedIndex = 0;
+  let lastBusStopIndex = 0;
+
+  routeLegsParsed?.find((routeLeg, index) => {
+    if (routeLeg?.stop === stopSelected) {
+      stopSelectedIndex = index;
+    }
+    if (routeLeg?.stop === lastBusStop) {
+      lastBusStopIndex = index;
+    }
+  });
+
+  // Last bus stop
+  let stopsToCountMinutes;
+  let totalSeconds = 0;
+
+  // Last bus stop is before your stop on the shuttle route starting at Walmart
+  if (lastBusStopIndex < stopSelectedIndex) {
+    stopsToCountMinutes = routeLegsParsed?.slice(
+      lastBusStopIndex,
+      stopSelectedIndex
+    );
+
+    totalSeconds = stopsToCountMinutes
+      ?.map((route) => route.duration.value)
+      .reduce((acc, curr) => acc + curr);
+  }
+
+  // Last bus stop is after your stop on the shuttle route starting at Walmart
+  if (lastBusStopIndex > stopSelectedIndex) {
+    stopsToCountMinutes = [
+      ...routeLegsParsed?.slice(lastBusStopIndex),
+      ...routeLegsParsed?.slice(0, stopSelectedIndex),
+    ];
+
+    totalSeconds = stopsToCountMinutes
+      ?.map((route) => route.duration.value)
+      .reduce((acc, curr) => acc + curr);
+  }
+
+  const totalMinutes =
+    Math.round(totalSeconds / 60) !== 0 ? Math.round(totalSeconds / 60) : 34;
+
+  return totalMinutes;
+};

@@ -18,11 +18,9 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <MantineProvider>
-      <RouterProvider router={router} />
-    </MantineProvider>
-  </React.StrictMode>
+  <MantineProvider>
+    <RouterProvider router={router} />
+  </MantineProvider>
 );
 
 reportWebVitals();

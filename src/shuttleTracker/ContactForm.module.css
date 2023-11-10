@@ -38,10 +38,17 @@
 
 .contactFormButton {
   background-color: #23242b;
-  height: 50px;
-  font-family: 'Roboto';
-  font-weight: 100;
+  display: block;
   width: 166px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 /* Tablet View - medium */

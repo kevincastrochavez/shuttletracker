@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.8.1",
+    "@emailjs/browser": "^3.11.0",
     "@mantine/core": "^7.1.5",
     "@mantine/hooks": "^7.1.5",
     "@react-google-maps/api": "^2.19.2",

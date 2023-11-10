@@ -45,7 +45,7 @@ export default function ShuttleTrackerProvider({
   const busSeats = 42;
   const vanSeats = 15;
   const totalSeats = isBus ? busSeats : vanSeats;
-  let seatsAvailable;
+  let seatsAvailable = totalSeats;
 
   const stopsCountObjPerDay = passengerCount?.[formattedTodaysDate];
   stopsCountObjPerDay !== undefined &&
@@ -57,12 +57,12 @@ export default function ShuttleTrackerProvider({
         };
       })
       .forEach((stop) => {
-        if (Number(stop?.passengersOff) > 0) {
-          seatsAvailable = totalSeats + Number(stop.passengersOff);
+        if (Number(stop?.passengersOn) > 0) {
+          seatsAvailable -= Number(stop.passengersOn);
         }
 
-        if (Number(stop?.passengersOn) > 0) {
-          seatsAvailable = totalSeats - Number(stop.passengersOn);
+        if (Number(stop?.passengersOff) > 0) {
+          seatsAvailable += Number(stop.passengersOff);
         }
       });
 

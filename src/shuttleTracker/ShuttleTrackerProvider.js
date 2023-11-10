@@ -41,7 +41,7 @@ export default function ShuttleTrackerProvider({
 
   const lastBusStop = getLastStop(formattedTodaysDate, passengerCount);
 
-  const isBus = busType === 'bus';
+  const isBus = busType === 'Bus';
   const busSeats = 42;
   const vanSeats = 15;
   const totalSeats = isBus ? busSeats : vanSeats;

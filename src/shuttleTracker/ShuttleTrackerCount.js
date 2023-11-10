@@ -23,8 +23,8 @@ function ShuttleTrackerCount() {
         width < 990 ? classes.countContainer : classes.countContainerLarge
       }
     >
-      <h2>{busType === 'bus' ? 'BUS' : 'VAN'}</h2>
-      <img src={bus} alt='' />
+      <h2>{busType === 'Bus' ? 'BUS' : 'VAN'}</h2>
+      <img src={bus} alt='Front for little bus' />
       <p>
         There are currently <b>{seatsAvailable}</b> out of <b>{totalSeats}</b>{' '}
         seats available.

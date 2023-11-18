@@ -1,0 +1,13 @@
+.content {
+  font-family: 'Roboto', sans-serif;
+}
+
+.contentContainer {
+  padding: 24px;
+}
+
+.content h1 {
+  font-size: 28.8px;
+  font-weight: normal;
+  text-align: center;
+}

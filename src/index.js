@@ -8,11 +8,16 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 const ShuttleTracker = lazy(() => import('./shuttleTracker/ShuttleTracker'));
+const Notifications = lazy(() => import('./notifications/Notifications'));
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <ShuttleTracker />,
+  },
+  {
+    path: '/notifications',
+    element: <Notifications />,
   },
 ]);
 

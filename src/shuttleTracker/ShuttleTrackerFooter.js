@@ -4,12 +4,7 @@ import { Link } from 'react-router-dom';
 import classes from './ShuttleTrackerFooter.module.css';
 
 function Footer() {
-  const [currentYear, setCurrentYear] = useState(0);
-
-  useEffect(() => {
-    const date = new Date().getFullYear();
-    setCurrentYear(date);
-  }, []);
+  const currentYear = new Date().getFullYear();
 
   const scrollPositionRef = useRef(0);
   const scrollToPosition = () => {

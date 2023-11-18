@@ -81,6 +81,13 @@
   justify-content: center;
 }
 
+.footerRights p {
+  margin-left: 20px;
+  width: 160px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .footerInfoBoxSingle a {
   color: #ffffff;
 }
@@ -140,8 +147,4 @@
   .footerInfoBoxSingle {
     text-align: left;
   }
-}
-
-/* Bigger View - extralarge */
-@media only screen and (min-width: 1200px) {
 }

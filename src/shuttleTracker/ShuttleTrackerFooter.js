@@ -14,6 +14,37 @@ function Footer() {
     });
   };
 
+  /**
+   * Creates link with custom link and name to LinkedIn
+   * @param {String} link custom link to LinkedIn
+   * @param {String} name user name
+   * @returns {{location, locationLoading}}
+   */
+  const includeLinkAndName = (link, name) => {
+    return (
+      <a href={link} target='_blank' rel='noreferrer'>
+        {name}
+      </a>
+    );
+  };
+
+  const cindysLink = includeLinkAndName(
+    'https://www.linkedin.com/in/cindycasttc/',
+    'Cindy'
+  );
+  const andresLink = includeLinkAndName(
+    'https://www.linkedin.com/in/andres-felipe-castro-2a628b165/',
+    'Andres'
+  );
+  const ignacioLink = includeLinkAndName(
+    'https://www.linkedin.com/in/ignacio-villar-b37895171/',
+    'Ignacio'
+  );
+  const kevinLink = includeLinkAndName(
+    'https://www.linkedin.com/in/kevincastroc0',
+    'Kevin'
+  );
+
   return (
     <div className={classes.footerContainer}>
       <div className={classes.footerContainerTitle}>
@@ -132,7 +163,10 @@ function Footer() {
       <div className={classes.footerInfoBox}>
         <div className={classes.footerInfoBoxSingle}>
           <div className={classes.footerRights}>
-            ® {currentYear} Castro | Villar
+            ® {currentYear}{' '}
+            <p>
+              {cindysLink} | {andresLink} | {ignacioLink} | {kevinLink}
+            </p>
           </div>
         </div>
       </div>

@@ -4,11 +4,27 @@
 
 .contentContainer {
   padding: 24px;
+  display: grid;
 }
 
-.content h1 {
+.contentContainer h1 {
   font-size: 28.8px;
   font-weight: normal;
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 90px;
+}
+
+.contentContainer > div {
+  margin-bottom: 30px;
+  max-width: 500px;
+}
+.contentContainer div {
+  justify-content: space-between;
+}
+
+@media only screen and (min-width: 548px) {
+  .contentContainer div {
+    justify-self: center;
+    width: 500px;
+  }
 }

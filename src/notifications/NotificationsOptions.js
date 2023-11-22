@@ -13,7 +13,7 @@ import NotificationsAlert from './NotificationsAlert';
  * @param {Boolean} deviationChecked true if bus took a deviation
  * @param {Boolean} reducedHoursChecked true if it's a holiday or reduced hours
  * @param {Boolean} heavyTrafficChecked true if there is heavy traffic
- * @param {Boolean} setNotificationAlert true if the alert should show up
+ * @param {Boolean} setNotificationSuccessAlert true if the success alert should show up
  * @returns {JSX.Element}
  */
 function saveNotificationsToDatabase(
@@ -21,7 +21,8 @@ function saveNotificationsToDatabase(
   deviationChecked,
   reducedHoursChecked,
   heavyTrafficChecked,
-  setNotificationAlert
+  setNotificationSuccessAlert,
+  setFailingAlert
 ) {
   const notificationsRef = ref(db, 'notifications/');
   const data = {
@@ -33,14 +34,18 @@ function saveNotificationsToDatabase(
 
   set(notificationsRef, data)
     .then(() => {
-      setNotificationAlert(true);
+      setNotificationSuccessAlert(true);
 
       setTimeout(() => {
-        setNotificationAlert(false);
+        setNotificationSuccessAlert(false);
       }, 2000);
     })
     .catch((error) => {
-      console.log('The write failed...');
+      setFailingAlert(true);
+
+      setTimeout(() => {
+        setFailingAlert(false);
+      }, 2000);
     });
 }
 
@@ -53,6 +58,7 @@ function NotificationsOptions() {
   const [alertDeviation, setAlertDeviation] = useState(false);
   const [alertReduce, setAlertReduce] = useState(false);
   const [alertTraffic, setAlertTraffic] = useState(false);
+  const [alertFail, setFailingAlert] = useState(false);
 
   const {
     vehicleBrokenChecked,
@@ -67,7 +73,8 @@ function NotificationsOptions() {
       deviationChecked,
       reducedHoursChecked,
       heavyTrafficChecked,
-      setAlertVehicle
+      setAlertVehicle,
+      setFailingAlert
     );
   };
 
@@ -77,7 +84,8 @@ function NotificationsOptions() {
       deviationChecked,
       reducedHoursChecked,
       !heavyTrafficChecked,
-      setAlertTraffic
+      setAlertTraffic,
+      setFailingAlert
     );
   };
 
@@ -87,7 +95,8 @@ function NotificationsOptions() {
       !deviationChecked,
       reducedHoursChecked,
       heavyTrafficChecked,
-      setAlertDeviation
+      setAlertDeviation,
+      setFailingAlert
     );
   };
 
@@ -97,7 +106,8 @@ function NotificationsOptions() {
       deviationChecked,
       !reducedHoursChecked,
       heavyTrafficChecked,
-      setAlertReduce
+      setAlertReduce,
+      setFailingAlert
     );
   };
 
@@ -130,7 +140,6 @@ function NotificationsOptions() {
           message={`This notification was turned ${
             vehicleBrokenChecked ? 'ON' : 'OFF'
           } successfully`}
-          setAlertVehicle
         />
       )}
       {alertDeviation && (
@@ -140,7 +149,6 @@ function NotificationsOptions() {
           message={`This notification was turned ${
             deviationChecked ? 'ON' : 'OFF'
           } successfully`}
-          setAlertDeviation
         />
       )}
       {alertReduce && (
@@ -150,7 +158,6 @@ function NotificationsOptions() {
           message={`This notification was turned ${
             reducedHoursChecked ? 'ON' : 'OFF'
           } successfully`}
-          setAlertReduce
         />
       )}
       {alertTraffic && (
@@ -160,7 +167,13 @@ function NotificationsOptions() {
           message={`This notification was turned ${
             heavyTrafficChecked ? 'ON' : 'OFF'
           } successfully`}
-          setAlertTraffic
+        />
+      )}
+      {alertFail && (
+        <NotificationsAlert
+          color='red'
+          title='Something went wrong'
+          message='Please try again later'
         />
       )}
     </>

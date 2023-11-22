@@ -8,17 +8,11 @@ import { IconInfoCircle } from '@tabler/icons-react';
  * @param {String} message custom message for the alert
  * @returns {Function}
  */
-function NotificationsAlert({ color, title, message, setAlert }) {
+function NotificationsAlert({ color, title, message }) {
   const icon = <IconInfoCircle />;
 
   return (
-    <Alert
-      variant='outline'
-      color={color}
-      title={title}
-      icon={icon}
-      onClose={() => setAlert(false)}
-    >
+    <Alert variant='outline' color={color} title={title} icon={icon}>
       {message}
     </Alert>
   );

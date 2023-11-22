@@ -26,7 +26,6 @@ export default function ShuttleTrackerLoader({ children }) {
   const [carType, setCarType] = useState('');
   const [passengerCount, setPassengerCount] = useState(true);
   const [locationLoading, setLocationLoading] = useState(true);
-  const [minutesAway, setMinutesAway] = useState(0);
   const [notifications, setNotifications] = useState({});
 
   const locationsRef = ref(db, 'locations/');
@@ -66,7 +65,6 @@ export default function ShuttleTrackerLoader({ children }) {
     <ShuttleTrackerProvider
       location={location}
       locationLoading={locationLoading}
-      minutesAway={minutesAway}
       busStopsList={busStopsList}
       carType={carType}
       passengerCount={passengerCount}

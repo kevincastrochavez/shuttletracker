@@ -1,16 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ref, set } from 'firebase/database';
 
 import { db } from '../firebase';
 import NotificationsSwitch from './NotificationsSwitch';
 import { useNotifications } from './NotificationsProvider';
+import NotificationsAlert from './NotificationsAlert';
+import { Alert } from '@mantine/core';
+
+/**
+ * Saves the state of the option notification to the database
+ * @param {Boolean} vehicleBrokenChecked true if bus is broken
+ * @param {Boolean} deviationChecked true if bus took a deviation
+ * @param {Boolean} reducedHoursChecked true if it's a holiday or reduced hours
+ * @param {Boolean} heavyTrafficChecked true if there is heavy traffic
+ * @param {Boolean} setNotificationAlert true if the alert should show up
+ * @returns {JSX.Element}
+ */
+function saveNotificationsToDatabase(
+  vehicleBrokenChecked,
+  deviationChecked,
+  reducedHoursChecked,
+  heavyTrafficChecked,
+  setNotificationAlert
+) {
+  const notificationsRef = ref(db, 'notifications/');
+  const data = {
+    brokenDown: vehicleBrokenChecked,
+    deviation: deviationChecked,
+    reduce: reducedHoursChecked,
+    traffic: heavyTrafficChecked,
+  };
+
+  set(notificationsRef, data)
+    .then(() => {
+      console.log('Data saved successfully!');
+      setNotificationAlert(true);
+
+      setTimeout(() => {
+        setNotificationAlert(false);
+      }, 2000);
+    })
+    .catch((error) => {
+      console.log('The write failed...');
+    });
+}
 
 /**
  * Returns the notification options to switch from the db
  * @returns {JSX.Element}
  */
 function NotificationsOptions() {
+  const [alertVehicle, setAlertVehicle] = useState(false);
+  const [alertDeviation, setAlertDeviation] = useState(false);
+  const [alertReduce, setAlertReduce] = useState(false);
+  const [alertTraffic, setAlertTraffic] = useState(false);
+
   const {
     vehicleBrokenChecked,
     deviationChecked,
@@ -18,43 +63,13 @@ function NotificationsOptions() {
     heavyTrafficChecked,
   } = useNotifications();
 
-  /**
-   * Saves the state of the option notification to the database
-   * @param {Boolean} vehicleBrokenChecked true if bus is broken
-   * @param {Boolean} deviationChecked true if bus took a deviation
-   * @param {Boolean} reducedHoursChecked true if it's a holiday or reduced hours
-   * @param {Boolean} heavyTrafficChecked true if there is heavy traffic
-   * @returns {JSX.Element}
-   */
-  function saveNotificationsToDatabase(
-    vehicleBrokenChecked,
-    deviationChecked,
-    reducedHoursChecked,
-    heavyTrafficChecked
-  ) {
-    const notificationsRef = ref(db, 'notifications/');
-    const data = {
-      brokenDown: vehicleBrokenChecked,
-      deviation: deviationChecked,
-      reduce: reducedHoursChecked,
-      traffic: heavyTrafficChecked,
-    };
-
-    set(notificationsRef, data)
-      .then(() => {
-        console.log('Data saved successfully!');
-      })
-      .catch((error) => {
-        console.log('The write failed...');
-      });
-  }
-
   const onVehicleBrokenChange = () => {
     saveNotificationsToDatabase(
       !vehicleBrokenChecked,
       deviationChecked,
       reducedHoursChecked,
-      heavyTrafficChecked
+      heavyTrafficChecked,
+      setAlertVehicle
     );
   };
 
@@ -63,7 +78,8 @@ function NotificationsOptions() {
       vehicleBrokenChecked,
       deviationChecked,
       reducedHoursChecked,
-      !heavyTrafficChecked
+      !heavyTrafficChecked,
+      setAlertTraffic
     );
   };
 
@@ -72,7 +88,8 @@ function NotificationsOptions() {
       vehicleBrokenChecked,
       !deviationChecked,
       reducedHoursChecked,
-      heavyTrafficChecked
+      heavyTrafficChecked,
+      setAlertDeviation
     );
   };
 
@@ -81,7 +98,8 @@ function NotificationsOptions() {
       vehicleBrokenChecked,
       deviationChecked,
       !reducedHoursChecked,
-      heavyTrafficChecked
+      heavyTrafficChecked,
+      setAlertReduce
     );
   };
 
@@ -107,6 +125,46 @@ function NotificationsOptions() {
         onChange={onReducedHoursChange}
         label='Reduced Service Hours'
       />
+      {alertVehicle && (
+        <NotificationsAlert
+          color='teal'
+          title='Vehicle Broken Down'
+          message={`This notification was turned ${
+            vehicleBrokenChecked ? 'ON' : 'OFF'
+          } successfully`}
+          setAlertVehicle
+        />
+      )}
+      {alertDeviation && (
+        <NotificationsAlert
+          color='teal'
+          title='Detour'
+          message={`This notification was turned ${
+            deviationChecked ? 'ON' : 'OFF'
+          } successfully`}
+          setAlertDeviation
+        />
+      )}
+      {alertReduce && (
+        <NotificationsAlert
+          color='teal'
+          title='Reduced Hours'
+          message={`This notification was turned ${
+            reducedHoursChecked ? 'ON' : 'OFF'
+          } successfully`}
+          setAlertReduce
+        />
+      )}
+      {alertTraffic && (
+        <NotificationsAlert
+          color='teal'
+          title='Heavy Traffic'
+          message={`This notification was turned ${
+            heavyTrafficChecked ? 'ON' : 'OFF'
+          } successfully`}
+          setAlertTraffic
+        />
+      )}
     </>
   );
 }

@@ -6,7 +6,6 @@ import { db } from '../firebase';
 import NotificationsSwitch from './NotificationsSwitch';
 import { useNotifications } from './NotificationsProvider';
 import NotificationsAlert from './NotificationsAlert';
-import { Alert } from '@mantine/core';
 
 /**
  * Saves the state of the option notification to the database
@@ -34,7 +33,6 @@ function saveNotificationsToDatabase(
 
   set(notificationsRef, data)
     .then(() => {
-      console.log('Data saved successfully!');
       setNotificationAlert(true);
 
       setTimeout(() => {

@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
 const NotificationsContext = createContext({});
 
@@ -18,10 +18,6 @@ export default function NotificationsProvider({
   reducedHoursChecked,
   heavyTrafficChecked,
 }) {
-  console.log('vehicleBrokenChecked', vehicleBrokenChecked);
-  console.log('deviationChecked', deviationChecked);
-  console.log('reducedHoursChecked', reducedHoursChecked);
-  console.log('heavyTrafficChecked', heavyTrafficChecked);
   return (
     <NotificationsContext.Provider
       value={{
@@ -34,4 +30,39 @@ export default function NotificationsProvider({
       {children}
     </NotificationsContext.Provider>
   );
+}
+
+/**
+ * Returns whether the notifications are turned on or not
+ * @returns {{vehicleBrokenChecked, deviationChecked, reducedHoursChecked, heavyTrafficChecked}}
+ */
+export function useNotifications() {
+  const {
+    vehicleBrokenChecked,
+    deviationChecked,
+    reducedHoursChecked,
+    heavyTrafficChecked,
+  } = useNotificationsProvider('useNotifications');
+  return {
+    vehicleBrokenChecked,
+    deviationChecked,
+    reducedHoursChecked,
+    heavyTrafficChecked,
+  };
+}
+
+/* PRIVATE FUNCTIONS */
+
+/**
+ * Enables making changes to the ShuttleMapContext (using the ShuttleMapUpdateContext)
+ * @param {string} functionName - just for using in error reporting
+ * @returns {{}}
+ */
+function useNotificationsProvider(functionName) {
+  const data = useContext(NotificationsContext);
+  if (!data)
+    throw new Error(
+      `${functionName} must be used within a component wrapped by NotificationsProvider`
+    );
+  return data;
 }

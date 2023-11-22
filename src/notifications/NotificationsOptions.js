@@ -1,49 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useNotifications } from './NotificationsProvider';
 
 import NotificationsSwitch from './NotificationsSwitch';
 
 function NotificationsOptions() {
-  const [vehicleBrokenChecked, setVehicleBrokenChecked] = useState(false);
-  const [heavyTrafficChecked, setHeavyTrafficChecked] = useState(false);
-  const [detourChecked, setDetourChecked] = useState(false);
-  const [reducedHoursChecked, setReducedHoursChecked] = useState(false);
+  const {
+    vehicleBrokenChecked,
+    deviationChecked,
+    reducedHoursChecked,
+    heavyTrafficChecked,
+  } = useNotifications();
 
-  const onVehicleBrokenChange = (e) => {
-    setVehicleBrokenChecked(e.currentTarget.checked);
-  };
+  // const onVehicleBrokenChange = (e) => {
+  //   setVehicleBrokenChecked(e.currentTarget.checked);
+  // };
 
-  const onHeavyTrafficChange = (e) => {
-    setHeavyTrafficChecked(e.currentTarget.checked);
-  };
+  // const onHeavyTrafficChange = (e) => {
+  //   setHeavyTrafficChecked(e.currentTarget.checked);
+  // };
 
-  const onDetourChange = (e) => {
-    setDetourChecked(e.currentTarget.checked);
-  };
+  // const onDetourChange = (e) => {
+  //   setDetourChecked(e.currentTarget.checked);
+  // };
 
-  const onReducedHoursChange = (e) => {
-    setReducedHoursChecked(e.currentTarget.checked);
-  };
+  // const onReducedHoursChange = (e) => {
+  //   setReducedHoursChecked(e.currentTarget.checked);
+  // };
 
   return (
     <>
       <NotificationsSwitch
         checked={vehicleBrokenChecked}
-        onChange={onVehicleBrokenChange}
+        // onChange={onVehicleBrokenChange}
         label='Vehicle Broke Down'
       />
       <NotificationsSwitch
         checked={heavyTrafficChecked}
-        onChange={onHeavyTrafficChange}
+        // onChange={onHeavyTrafficChange}
         label='Heavy Traffic'
       />
       <NotificationsSwitch
-        checked={detourChecked}
-        onChange={onDetourChange}
+        checked={deviationChecked}
+        // onChange={onDetourChange}
         label='Detour'
       />
       <NotificationsSwitch
         checked={reducedHoursChecked}
-        onChange={onReducedHoursChange}
+        // onChange={onReducedHoursChange}
         label='Reduced Service Hours'
       />
     </>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import { Switch } from '@mantine/core';
 import NotificationsSwitch from './NotificationsSwitch';
 
 function NotificationsOptions() {

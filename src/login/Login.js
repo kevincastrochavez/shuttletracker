@@ -14,11 +14,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { auth } from '../firebase';
 import { useSetUser } from './LoginProvider';
+import NotificationsAlert from '../notifications/NotificationsAlert';
 
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useSetUser();
 
@@ -38,11 +40,16 @@ export default function Login() {
       .catch((error) => {
         console.log(error);
         setIsLoginLoading(false);
+        setShowAlert(true);
+
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 8000);
       });
   };
 
   return (
-    <Paper radius='md' p='xl' withBorder>
+    <Paper radius='md' p='xl' withBorder px={24} pl={24} mx={24} my={24}>
       <Text size='lg' fw={500}>
         Welcome to ShuttleTracker Notifications
       </Text>
@@ -69,11 +76,24 @@ export default function Login() {
         </Stack>
 
         <Group justify='space-between' mt='xl'>
-          <Button loading={isLoginLoading} type='submit' radius='md' size='md'>
+          <Button
+            mb={30}
+            loading={isLoginLoading}
+            type='submit'
+            radius='md'
+            size='md'
+          >
             Login
           </Button>
         </Group>
       </form>
+      {showAlert && (
+        <NotificationsAlert
+          color='red'
+          title='Email or Password wrong'
+          message='Make sure to enter your email or password correctly. If you are sure they are correct, contact the Developers'
+        />
+      )}
     </Paper>
   );
 }

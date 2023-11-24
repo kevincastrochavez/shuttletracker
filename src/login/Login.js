@@ -13,17 +13,14 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 import { auth } from '../firebase';
-import { useSetUser, useUser } from './LoginProvider';
+import { useSetUser } from './LoginProvider';
 
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const navigate = useNavigate();
-  const { user } = useUser();
   const { setUser } = useSetUser();
-
-  console.log(user);
 
   const onLogin = (e) => {
     setIsLoginLoading(true);

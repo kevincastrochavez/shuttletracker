@@ -4,8 +4,10 @@ import { IconLogout } from '@tabler/icons-react';
 
 import classes from './NotificationsNavbar.module.css';
 import { auth } from '../firebase';
+import { useSetUser } from '../login/LoginProvider';
 
 function NotificationsNavbar() {
+  const { setUser } = useSetUser();
   const navigate = useNavigate();
   const iconLogout = <IconLogout />;
 
@@ -13,6 +15,7 @@ function NotificationsNavbar() {
     auth
       .signOut()
       .then(() => {
+        setUser(null);
         navigate('/');
       })
       .catch((error) => {

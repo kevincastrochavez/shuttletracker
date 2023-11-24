@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { auth } from '../firebase';
 
-export function ShuttleLogin() {
+export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isLoginLoading, setIsLoginLoading] = useState(false);

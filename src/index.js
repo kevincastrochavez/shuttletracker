@@ -6,10 +6,10 @@ import '@mantine/core/styles.css';
 
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { ShuttleLogin } from './login/ShuttleLogin';
 
 const ShuttleTracker = lazy(() => import('./shuttleTracker/ShuttleTracker'));
 const Notifications = lazy(() => import('./notifications/Notifications'));
+const Login = lazy(() => import('./login/Login'));
 
 const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <ShuttleLogin />,
+    element: <Login />,
   },
 ]);
 

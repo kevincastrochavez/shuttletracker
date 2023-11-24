@@ -29,6 +29,7 @@ export default function ShuttleTrackerProvider({
 }) {
   const [value] = useStorage('preferredBusStop', 'BYU-I Hart');
   const [stopSelected, setStopSelected] = useState(() => value);
+  const [activeMarker, setActiveMarker] = useState(null);
   const { busType } = carType;
   // TODO: Use this when database is updated with stops
   // const dayDate = new Date().getDate();
@@ -75,7 +76,9 @@ export default function ShuttleTrackerProvider({
   }, [location?.location?.latitude, location?.location?.longitude]);
 
   return (
-    <ShuttleTrackerUpdateContext.Provider value={{ setStopSelected }}>
+    <ShuttleTrackerUpdateContext.Provider
+      value={{ setStopSelected, setActiveMarker }}
+    >
       <ShuttleTrackerContext.Provider
         value={{
           location,
@@ -88,12 +91,22 @@ export default function ShuttleTrackerProvider({
           totalSeats,
           notifications,
           lastBusStop,
+          activeMarker,
         }}
       >
         {children}
       </ShuttleTrackerContext.Provider>
     </ShuttleTrackerUpdateContext.Provider>
   );
+}
+
+/**
+ * Provides the id of the active marker, if there's one
+ * @returns {{activeMarker}}
+ */
+export function useActiveMarker() {
+  const { activeMarker } = useShuttleTrackerProvider('useActiveMarker');
+  return { activeMarker };
 }
 
 /**
@@ -141,6 +154,16 @@ export function useNotifications() {
 export function usePreferredStop() {
   const { stopSelected } = useShuttleTrackerProvider('usePreferredStop');
   return { stopSelected };
+}
+
+/**
+ * Sets the active marker id
+ * @returns {{setActiveMarker}}
+ */
+export function useSetActiveMarker() {
+  const { setActiveMarker } =
+    useSetShuttleTrackerProvider('useSetActiveMarker');
+  return { setActiveMarker };
 }
 
 /**

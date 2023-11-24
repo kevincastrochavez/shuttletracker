@@ -4,13 +4,19 @@ import {
   GoogleMap,
   Marker,
   DirectionsRenderer,
+  InfoWindow,
 } from '@react-google-maps/api';
 import { Skeleton } from '@mantine/core';
 import { Box, Flex } from '@chakra-ui/react';
 import { useViewportSize } from '@mantine/hooks';
 import classes from './GoogleMapComponent.module.css';
 
-import { useBusInfo, usePreferredStop } from './ShuttleTrackerProvider';
+import {
+  useActiveMarker,
+  useBusInfo,
+  usePreferredStop,
+  useSetActiveMarker,
+} from './ShuttleTrackerProvider';
 import marker from './images/navigation.svg';
 import userMarker from './images/user.svg';
 import stopMarker from './images/stop.svg';
@@ -97,6 +103,8 @@ const stopsList = [
 ];
 
 function GoogleMapComponent() {
+  const { activeMarker } = useActiveMarker();
+  const { setActiveMarker } = useSetActiveMarker();
   const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [userLatitude, setUserLatitude] = useState(0);
@@ -187,7 +195,14 @@ function GoogleMapComponent() {
               position={waypointPosition}
               map={map}
               icon={stopMarker}
-            />
+              onClick={() => setActiveMarker(index)}
+            >
+              {activeMarker === index ? (
+                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                  <div>{stopsList[index]}</div>
+                </InfoWindow>
+              ) : null}
+            </Marker>
           ))}
           <Marker position={busLocation} icon={marker} map={map} />
           {userLatitude !== 0 && userLongitude !== 0 && (

@@ -6,6 +6,7 @@ import '@mantine/core/styles.css';
 
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import LoginProvider from './login/LoginProvider';
 
 const ShuttleTracker = lazy(() => import('./shuttleTracker/ShuttleTracker'));
 const Notifications = lazy(() => import('./notifications/Notifications'));
@@ -29,7 +30,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <MantineProvider>
-    <RouterProvider router={router} />
+    <LoginProvider>
+      <RouterProvider router={router} />
+    </LoginProvider>
   </MantineProvider>
 );
 

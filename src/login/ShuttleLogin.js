@@ -10,6 +10,7 @@ import {
 } from '@mantine/core';
 import { useRef, useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 import { auth } from '../firebase';
 
@@ -17,6 +18,7 @@ export function ShuttleLogin() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const navigate = useNavigate();
 
   const onLogin = (e) => {
     setIsLoginLoading(true);
@@ -27,8 +29,8 @@ export function ShuttleLogin() {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
         setIsLoginLoading(false);
+        navigate('/notifications');
       })
       .catch((error) => {
         console.log(error);

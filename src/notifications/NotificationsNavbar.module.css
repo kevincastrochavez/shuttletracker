@@ -1,10 +1,16 @@
 .navbar {
   background-color: #23242b;
-  padding: 20px 24px;
   display: flex;
   justify-content: end;
   align-items: center;
+}
+
+.navbar div {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
   gap: 8px;
+  cursor: pointer;
 }
 
 .navbar p {

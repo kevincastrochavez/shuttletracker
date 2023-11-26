@@ -218,7 +218,7 @@ function GoogleMapComponent() {
           >
             {showBusInfoWindow && (
               <InfoWindow onCloseClick={() => setShowBusInfoWindow(false)}>
-                <div>Bus's current location</div>
+                <div>Bus' current location</div>
               </InfoWindow>
             )}
           </Marker>

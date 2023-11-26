@@ -109,6 +109,7 @@ function GoogleMapComponent() {
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [userLatitude, setUserLatitude] = useState(0);
   const [userLongitude, setUserLongitude] = useState(0);
+  const [showBusInfoWindow, setShowBusInfoWindow] = useState(false);
   const { busLocation, lastBusStop } = useBusInfo();
   const { stopSelected } = usePreferredStop();
 
@@ -165,6 +166,11 @@ function GoogleMapComponent() {
   ).map((waypoint) => waypoint.location);
   const waypointMarkersLocation = [walmartCoords, ...waypointsLocation];
 
+  const onMarkerClick = (index) => {
+    setActiveMarker(index);
+    setShowBusInfoWindow(false);
+  };
+
   return (
     <Flex
       position='relative'
@@ -195,7 +201,7 @@ function GoogleMapComponent() {
               position={waypointPosition}
               map={map}
               icon={stopMarker}
-              onClick={() => setActiveMarker(index)}
+              onClick={() => onMarkerClick(index)}
             >
               {activeMarker === index ? (
                 <InfoWindow onCloseClick={() => setActiveMarker(null)}>
@@ -204,7 +210,18 @@ function GoogleMapComponent() {
               ) : null}
             </Marker>
           ))}
-          <Marker position={busLocation} icon={marker} map={map} />
+          <Marker
+            position={busLocation}
+            icon={marker}
+            map={map}
+            onClick={() => setShowBusInfoWindow(true)}
+          >
+            {showBusInfoWindow && (
+              <InfoWindow onCloseClick={() => setShowBusInfoWindow(false)}>
+                <div>Bus's current location</div>
+              </InfoWindow>
+            )}
+          </Marker>
           {userLatitude !== 0 && userLongitude !== 0 && (
             <Marker
               position={{ lat: userLatitude, lng: userLongitude }}

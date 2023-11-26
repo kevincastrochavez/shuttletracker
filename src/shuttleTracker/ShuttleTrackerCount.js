@@ -1,6 +1,6 @@
 import React from 'react';
 import { useViewportSize } from '@mantine/hooks';
-import { ActionIcon, Popover, Text } from '@mantine/core';
+import { ActionIcon, Popover, Progress, Text } from '@mantine/core';
 import { IconInfoSmall } from '@tabler/icons-react';
 
 import classes from './ShuttleTrackerCount.module.css';
@@ -16,6 +16,8 @@ function ShuttleTrackerCount() {
   const { width } = useViewportSize();
   const icon = <IconInfoSmall />;
 
+  const barPercentage = Math.round((seatsAvailable / totalSeats) * 100);
+
   const {
     carType: { busType },
   } = useCarType();
@@ -29,8 +31,9 @@ function ShuttleTrackerCount() {
       <h2>{busType === 'Bus' ? 'BUS' : 'VAN'}</h2>
       <img src={bus} alt='Front for little bus' />
       <p>
-        There are currently <b>{seatsAvailable}</b> out of <b>{totalSeats}</b>{' '}
-        seats available.{' '}
+        There are currently{' '}
+        <b className={classes.countIndicator}>{seatsAvailable}</b> out of{' '}
+        <b>{totalSeats}</b> seats available.{' '}
         <Popover width={200} position='bottom' withArrow shadow='md'>
           <Popover.Target>
             <ActionIcon
@@ -50,7 +53,7 @@ function ShuttleTrackerCount() {
           </Popover.Dropdown>
         </Popover>
       </p>
-      <div className={classes.countBar}></div>
+      <Progress color={'#fec007'} value={barPercentage} />
     </div>
   );
 }
